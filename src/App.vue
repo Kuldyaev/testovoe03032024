@@ -19,7 +19,7 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: MabryPro, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -27,5 +27,15 @@ export default {
   color: $primary-gray;
   margin: 0;
   padding: 0;
+}
+
+@font-face {
+  font-family: "MabryPro";
+  src: url("@/assets/fonts/MabryPro-Medium.ttf");
+  src: local("MabryPro"),
+    url("@/assets/fonts/MabryPro-Medium.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 </style>

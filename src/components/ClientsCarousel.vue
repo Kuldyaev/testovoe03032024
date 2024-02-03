@@ -14,5 +14,10 @@ import FlexBox from "@/components/FlexBox.vue";
 <style scoped lang="scss">
 h1 {
   color: $primary-gray;
+  font-family: "MabryPro";
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 67.2px;
+  letter-spacing: calc(-0.05 * 56px);
 }
 </style>
