@@ -1,18 +1,21 @@
 <template>
   <FlexBox w="100%" direction="column">
     <OurClients />
+    <FooterComponent />
   </FlexBox>
 </template>
 
 <script lang="ts">
 import FlexBox from "@/components/FlexBox.vue";
 import OurClients from "@/components/OurClients.vue";
+import FooterComponent from "./components/FooterComponent.vue";
 
 export default {
   name: "App",
   components: {
     FlexBox,
     OurClients,
+    FooterComponent,
   },
 };
 </script>
