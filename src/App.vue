@@ -1,18 +1,18 @@
 <template>
   <FlexBox w="100%" direction="column">
-    <ClientsCarousel />
+    <OurClients />
   </FlexBox>
 </template>
 
 <script lang="ts">
 import FlexBox from "@/components/FlexBox.vue";
-import ClientsCarousel from "@/components/ClientsCarousel.vue";
+import OurClients from "@/components/OurClients.vue";
 
 export default {
   name: "App",
   components: {
     FlexBox,
-    ClientsCarousel,
+    OurClients,
   },
 };
 </script>
