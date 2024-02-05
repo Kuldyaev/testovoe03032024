@@ -1,6 +1,7 @@
 <template>
   <FlexBox w="100%" direction="column">
     <OurClients />
+    <MainComponent />
     <FooterComponent />
   </FlexBox>
 </template>
@@ -9,12 +10,14 @@
 import FlexBox from "@/components/FlexBox.vue";
 import OurClients from "@/components/OurClients.vue";
 import FooterComponent from "./components/FooterComponent.vue";
+import MainComponent from "./components/MainComponent.vue";
 
 export default {
   name: "App",
   components: {
     FlexBox,
     OurClients,
+    MainComponent,
     FooterComponent,
   },
 };
