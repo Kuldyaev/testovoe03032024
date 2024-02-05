@@ -1,5 +1,6 @@
 export interface FlexBoxProps {
   wrap?: boolean;
+  class?: string;
   direction?: "column" | "row";
   justify?:
     | "between"

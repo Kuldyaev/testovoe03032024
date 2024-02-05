@@ -1,5 +1,5 @@
 <template>
-  <div class="flexbox" :style="styleObject">
+  <div :class="classFlex" :style="styleObject">
     <slot />
   </div>
 </template>
@@ -20,6 +20,7 @@ const JUS_ALIAS = {
 };
 
 const props = withDefaults(defineProps<FlexBoxProps>(), {
+  class: "",
   direction: "row",
   wrap: false,
   justify: "center",
@@ -40,6 +41,8 @@ const props = withDefaults(defineProps<FlexBoxProps>(), {
 const { justify, align, gap, hide, bgcolor } = toRefs(props);
 const cssjustify = JUS_ALIAS[justify.value];
 const alignjustify = JUS_ALIAS[align.value];
+
+const classFlex = "flexbox " + String(props.class);
 
 const styleObject = reactive({
   gap: String(gap.value) + "px",
