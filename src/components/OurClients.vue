@@ -57,7 +57,7 @@ import ClientsCarousel from "./ClientsCarousel.vue";
     padding: 54px 0 38px 30px;
   }
 }
-@media (max-width: $under-modile) {
+@media (max-width: $under-mobile) {
   .title {
     width: 91.667vw;
     padding: 15vw 0 10.555vw 8.333vw;

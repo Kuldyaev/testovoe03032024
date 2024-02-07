@@ -162,6 +162,20 @@ h6 {
     line-height: 46.2px;
     letter-spacing: calc(-0.05 * 42px);
   }
+  h3 {
+    font-size: 16px;
+    line-height: 22.6px;
+    letter-spacing: calc(-0.05 * 16px);
+  }
+  h4 {
+    font-size: 24px;
+    line-height: 26.4px;
+    font-weight: 500;
+  }
+  h6 {
+    font-size: 12px;
+    line-height: 19.2px;
+  }
 }
 
 //360px
@@ -171,20 +185,38 @@ h6 {
     line-height: 46.2px;
     letter-spacing: calc(-0.05 * 42px);
   }
+  h3 {
+    font-size: 16px;
+    line-height: 22.6px;
+    letter-spacing: calc(-0.03 * 16px);
+  }
 }
-@media (max-width: $under-modile) {
+@media (max-width: $under-mobile) {
   h1 {
     font-size: 11.667vw;
     line-height: 12.833vw;
     letter-spacing: calc(-0.05 * 11.667vw);
   }
+  h3 {
+    font-size: 4.444vw;
+    line-height: 6.278vw;
+    letter-spacing: calc(-0.03 * 4.444vw);
+  }
+  h4 {
+    font-size: 6.667vw;
+    line-height: 7.333vw;
+  }
+  h6 {
+    font-size: 3.333vw;
+    line-height: 5.333vw;
+  }
 }
 
 @font-face {
   font-family: "MabryPro";
-  src: url("@/assets/fonts/MabryPro-Medium.ttf");
+  src: url("@/assets/fonts/MabryPro-Light.ttf");
   src: local("MabryPro"),
-    url("@/assets/fonts/MabryPro-Medium.ttf") format("truetype");
+    url("@/assets/fonts/MabryPro-Light.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;

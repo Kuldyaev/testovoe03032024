@@ -2,8 +2,12 @@
   <main>
     <section>
       <h1>Обсудить проект</h1>
-      <h3>Расскажите о проекте в форме справа или свяжитесь с нами напрямую</h3>
-      <FlexBox direction="column">
+      <h3>
+        Расскажите о проекте в форме
+        {{ screenWidth > 768 ? "справа" : "ниже" }} или свяжитесь с нами
+        напрямую
+      </h3>
+      <FlexBox class="contactGroup">
         <FlexBox direction="column" justify="start" align="start" class="mail">
           <FlexBox
             class="writeUs"
@@ -24,10 +28,11 @@
             justify="start"
             align="center"
           >
-            <div class="avatar"></div>
+            <div class="avatar" v-if="screenWidth > 360"></div>
             <a href="https://t.me/hello_riverstart" target="_blank">
               <h4>@ekhohrin</h4>
             </a>
+            <div class="avatar avatarRight" v-if="screenWidth <= 360"></div>
           </FlexBox>
           <h6>Написать нашему аккаунт- директору в Telegram</h6>
         </FlexBox>
@@ -88,6 +93,12 @@ a {
   margin-right: 10px;
   background-image: url("~@/assets/img/png/avatar.png");
   background-size: contain;
+}
+.avatarRight {
+  background-image: url("~@/assets/img/png/avatarRight.png");
+}
+.contactGroup {
+  flex-direction: column;
 }
 
 @media (min-width: $over-big-screen) {
@@ -210,7 +221,159 @@ a {
     flex-direction: column;
   }
   section {
-    width: 100%;
+    width: calc(100% - 80px);
+    padding: 52px 40px 0 40px;
+  }
+  h3 {
+    width: 515px;
+    height: auto;
+    margin-bottom: 62px;
+  }
+  .contactGroup {
+    flex-direction: row;
+    justify-content: flex-start;
+    width: calc(100% - 82px);
+    margin-bottom: 31.5px;
+  }
+  .mail {
+    margin: 0;
+    width: 224px;
+  }
+  .writeUs {
+    width: 270px;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 720px) {
+  section,
+  h3,
+  .contactGroup {
+    width: 88.888vw;
+  }
+  section {
+    padding: 7.222vw 5.556vw 0 5.556vw;
+  }
+  h3 {
+    margin-bottom: 8.611vw;
+  }
+  .contactGroup {
+    margin-bottom: 4.305vw;
+  }
+  .mail {
+    width: 31.111vw;
+    min-height: 4.444vw;
+    justify-content: normal;
+  }
+  .writeUs {
+    width: 37.5vw;
+    height: 4.444vw;
+    justify-content: flex-start;
+  }
+
+  .avatar {
+    width: 4.444vw;
+    height: 4.444vw;
+    margin-right: 0.65vw;
+    justify-content: center;
+  }
+  h4 {
+    font-size: 3.333vw;
+    line-height: 3.667vw;
+  }
+  h6 {
+    font-size: 1.667vw;
+    line-height: 2.666vw;
+  }
+}
+
+//360px
+@media (max-width: $mobile) {
+  section {
+    width: calc(100% - 60px);
+    padding: 40px 30px 0 30px;
+  }
+  h1 {
+    font-size: 38px;
+    line-height: 45.6px;
+    letter-spacing: calc(-0.03 * 38px);
+    margin-bottom: 16px;
+  }
+  h3 {
+    width: 300px;
+    margin-bottom: 59px;
+    font-weight: 400;
+  }
+  .contactGroup {
+    flex-direction: column;
+    justify-content: flex-start;
+    width: calc(100vw - 60px);
+    margin-bottom: 45px;
+  }
+  .mail {
+    margin: 0;
+    width: calc(100vw - 60px);
+    margin-bottom: 21px;
+  }
+  .writeUs {
+    width: calc(100vw - 60px);
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 30px;
+    margin-bottom: 3px;
+  }
+  h6 {
+    width: calc(100vw - 60px);
+    text-align: left;
+    justify-content: flex-start;
+    margin: 0;
+    font-weight: 200;
+  }
+  .avatar {
+    width: 30px;
+    height: 30px;
+    margin-left: 8px;
+    background-size: 100%;
+    background-position: center center;
+  }
+}
+
+@media (max-width: $under-mobile) {
+  section {
+    width: 83.333vw;
+    padding: 11.111vw 8.333vw 0 8.333vw;
+  }
+  h1 {
+    font-size: 10.556vw;
+    line-height: 12.667vw;
+    letter-spacing: calc(-0.03 * 10.556vw);
+    margin-bottom: 4.444vw;
+  }
+  h3 {
+    width: 83.3333vw;
+    margin-bottom: 16.389vw;
+  }
+  .contactGroup {
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 83.3333vw;
+    margin-bottom: 12.5vw;
+  }
+  .writeUs,
+  h6,
+  .mail {
+    width: 83.3333vw;
+  }
+  .mail {
+    margin-bottom: 5.833vw;
+  }
+  .writeUs {
+    height: 8.333vw;
+    margin-bottom: 0.833vw;
+  }
+  .avatar {
+    width: 8.333vw;
+    height: 8.333vw;
+    margin-left: 2.222vw;
   }
 }
 </style>
