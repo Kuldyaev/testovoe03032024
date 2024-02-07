@@ -371,7 +371,7 @@ a {
     padding: 53px 0 81px 30px;
   }
 }
-@media (max-width: $under-modile) {
+@media (max-width: $under-mobile) {
   .carouselFooter {
     width: 91.667vw;
     padding: 14.722vw 0 22.222vw 8.333vw;
