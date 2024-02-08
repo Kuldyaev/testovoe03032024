@@ -9,8 +9,8 @@
 <script lang="ts">
 import FlexBox from "@/components/FlexBox.vue";
 import OurClients from "@/components/OurClients.vue";
-import FooterComponent from "./components/FooterComponent.vue";
 import MainComponent from "./components/MainComponent.vue";
+import FooterComponent from "./components/FooterComponent.vue";
 
 export default {
   name: "App",
