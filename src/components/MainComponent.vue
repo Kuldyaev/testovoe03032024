@@ -37,10 +37,10 @@
           <h6>Написать нашему аккаунт- директору в Telegram</h6>
         </FlexBox>
       </FlexBox>
-      <p v-if="screenWidth > 768">{{ screenWidth }}</p>
+      <AddressComponent v-if="screenWidth > 768" />
     </section>
     <RequestForm />
-    <p v-if="screenWidth <= 768">{{ screenWidth }}</p>
+    <AddressComponent v-if="screenWidth <= 768" />
   </main>
 </template>
 
@@ -48,6 +48,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import FlexBox from "./FlexBox.vue";
 import RequestForm from "./RequestForm.vue";
+import AddressComponent from "./AddressComponent.vue";
 
 const screenWidth = ref<number>(0);
 const screenHeght = ref<number>(0);
