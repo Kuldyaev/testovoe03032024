@@ -37,7 +37,7 @@
           <h6 class="white">Таллинский офис</h6>
           <h6>3 korrus, Metro Plaza, Viru väljak 2</h6>
           <a href="tel:+3726104253">
-            <h6>+372 610-42-53{{ screenWidth }}</h6>
+            <h6>+372 610-42-53{{ xxx }}</h6>
           </a>
         </FlexBox>
         <FlexBox
@@ -69,17 +69,13 @@
 
 <script setup lang="ts">
 import FlexBox from "./FlexBox.vue";
-import { ref, toRefs, watch } from "vue";
+import { computed } from "vue";
 
-export interface Props {
-  screenWidth: number;
-}
+const props = defineProps(["screenWidth"]);
 
-const { screenWidth } = withDefaults(defineProps<Props>(), {
-  screenWidth: 1920,
+const xxx = computed(() => {
+  return props.screenWidth;
 });
-
-console.log(screenWidth);
 </script>
 
 <style scoped lang="scss">
