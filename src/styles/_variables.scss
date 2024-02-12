@@ -6,10 +6,11 @@ $black: #000000;
 $additional-grey: #9a9aad;
 
 // breakpoints
-$over-big-screen: 1921px;
+
 $big-screen: 1920px;
+$over-big-screen: calc($big-screen + 1px);
 $middle-screen: 1280px;
 $small-screen: 768px;
 $big-mobile: 544px;
 $mobile: 360px;
-$under-mobile: 359px;
+$under-mobile: calc($mobile - 1px);
