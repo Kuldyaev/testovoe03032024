@@ -42,6 +42,7 @@ body {
 h1,
 h3,
 h4,
+h5,
 h6 {
   color: $primary-gray;
   font-family: "MabryPro";
@@ -68,6 +69,11 @@ h6 {
     line-height: 2.406vw;
     letter-spacing: calc(-0.05 * 2.1875vw);
   }
+  h5 {
+    font-size: 1.198vw;
+    line-height: 1.4375vw;
+    letter-spacing: calc(-0.02 * 1.198vw);
+  }
   h6 {
     font-size: 0.9375vw;
     line-height: 1.5vw;
@@ -89,6 +95,11 @@ h6 {
     line-height: 46.2px;
     letter-spacing: calc(-0.05 * 42px);
   }
+  h5 {
+    font-size: 23px;
+    line-height: 27.6px;
+    letter-spacing: calc(-0.02 * 23px);
+  }
   h6 {
     font-size: 18px;
     line-height: 28.8px;
@@ -108,6 +119,11 @@ h6 {
     font-size: 2.211vw;
     line-height: 2.432vw;
     letter-spacing: calc(-0.05 * 2.211vw);
+  }
+  h5 {
+    font-size: 1.211vw;
+    line-height: 1.4375vw;
+    letter-spacing: calc(-0.02 * 1.211vw);
   }
   h6 {
     font-size: 0.947vw;
@@ -130,6 +146,11 @@ h6 {
     line-height: 30.8px;
     letter-spacing: calc(-0.05 * 28px);
   }
+  h5 {
+    font-size: 15.33px;
+    line-height: 18.4px;
+    letter-spacing: calc(-0.02 * 15.3px);
+  }
   h6 {
     font-size: 14px;
     line-height: 22.4px;
@@ -149,6 +170,11 @@ h6 {
     font-size: 2.734vw;
     line-height: 3.007vw;
     letter-spacing: calc(-0.05 * 2.734vw);
+  }
+  h5 {
+    font-size: 1.497vw;
+    line-height: 1.797vw;
+    letter-spacing: calc(-0.02 * 1.497vw);
   }
   h6 {
     font-size: 1.367vw;
@@ -171,6 +197,11 @@ h6 {
     font-size: 24px;
     line-height: 26.4px;
     font-weight: 500;
+  }
+  h5 {
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: calc(-0.02 * 15px);
   }
   h6 {
     font-size: 12px;
@@ -206,6 +237,12 @@ h6 {
     font-size: 6.667vw;
     line-height: 7.333vw;
   }
+  h5 {
+    font-size: 4.167vw;
+    line-height: 5vw;
+    letter-spacing: calc(-0.02 * 4.167vw);
+  }
+
   h6 {
     font-size: 3.333vw;
     line-height: 5.333vw;

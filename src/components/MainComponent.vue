@@ -37,10 +37,10 @@
           <h6>Написать нашему аккаунт- директору в Telegram</h6>
         </FlexBox>
       </FlexBox>
-      <AddressComponent v-if="screenWidth > 768" />
+      <AddressComponent v-if="screenWidth > 768" :screenWidth="screenWidth" />
     </section>
     <RequestForm />
-    <AddressComponent v-if="screenWidth <= 768" />
+    <AddressComponent v-if="screenWidth <= 768" :screenWidth="screenWidth" />
   </main>
 </template>
 
