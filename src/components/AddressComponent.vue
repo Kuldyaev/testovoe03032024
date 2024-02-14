@@ -104,8 +104,45 @@ const mesurRect: measures = computed(() => {
         " " +
         String(Math.round(0.17684 * props.screenWidth)),
     ];
-  } else {
+  } else if (1025 <= props.screenWidth && props.screenWidth <= 1280) {
     return [407.33, 228.75, 16, "0 0 407 229"];
+  } else if (769 <= props.screenWidth && props.screenWidth <= 1024) {
+    return [
+      Math.round(0.39778 * props.screenWidth),
+      Math.round(0.22339 * props.screenWidth),
+      Math.round(0.01563 * props.screenWidth),
+      "0 0 " +
+        String(Math.round(0.39778 * props.screenWidth)) +
+        " " +
+        String(Math.round(0.22339 * props.screenWidth)),
+    ];
+  } else if (721 <= props.screenWidth && props.screenWidth <= 768) {
+    return [
+      props.screenWidth - 80,
+      222,
+      16,
+      "0 0 " + String(props.screenWidth - 80) + " 222",
+    ];
+  } else if (361 <= props.screenWidth && props.screenWidth <= 720) {
+    return [
+      Math.round(0.88 * props.screenWidth),
+      Math.round(0.30833 * props.screenWidth),
+      Math.round(0.02222 * props.screenWidth),
+      "0 0 " +
+        String(Math.round(0.88 * props.screenWidth)) +
+        " " +
+        String(Math.round(0.30833 * props.screenWidth)),
+    ];
+  } else {
+    return [
+      props.screenWidth,
+      Math.round(0.61667 * props.screenWidth),
+      0,
+      "0 0 " +
+        String(props.screenWidth) +
+        " " +
+        String(Math.round(0.61667 * props.screenWidth)),
+    ];
   }
 });
 </script>
@@ -300,6 +337,242 @@ a {
     min-height: 9.33px;
     margin-left: 5px;
     margin-top: 4px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .addresses {
+    width: 39.778vw;
+    height: 32.977vw;
+    margin-top: 12.695vw;
+  }
+  .msk,
+  .nn,
+  .tln {
+    height: 6.934vw;
+    width: 19.043vw;
+  }
+  .msk,
+  .nn,
+  .tln > h6 {
+    font-size: 1.172vw;
+    line-height: 1.406vw;
+  }
+  .nn {
+    margin-left: 2.929vw;
+  }
+  .tallin {
+    width: 39.778vw;
+    height: 22.339vw;
+  }
+  .tallinInfo {
+    padding: 2.148vw 2.148vw 2.148vw 2.539vw;
+    height: 17.881vw;
+  }
+  .mainLinkBlock,
+  .linkBlockText {
+    height: 6.648vw;
+  }
+  .linkBlockText > h6 {
+    font-size: 1.172vw;
+    line-height: 1.406vw;
+  }
+  .osLogo {
+    min-width: 5.983vw;
+    max-width: 5.983vw;
+    min-height: 5.983vw;
+  }
+  .osLink {
+    min-width: 0.931vw;
+    max-width: 0.931vw;
+    min-height: 0.931vw;
+    margin-left: 0.488vw;
+    margin-top: 0.391vw;
+  }
+}
+@media (max-width: $small-screen) {
+  .addresses {
+    width: calc(100% - 80px);
+    padding: 57px 40px 0 40px;
+    margin: 0;
+  }
+  .msk,
+  .nn,
+  .tln {
+    height: 71px;
+    width: 195px;
+  }
+  .msk,
+  .nn,
+  .tln > h6 {
+    font-size: 12px;
+    line-height: 14.4px;
+  }
+  .nn {
+    margin-left: 30px;
+  }
+  .tallin {
+    width: 100%;
+    height: 222px;
+  }
+  .tallinInfo {
+    padding: 22px 29px 22px 30px;
+    height: 178px;
+  }
+  .mainLinkBlock,
+  .linkBlockText {
+    height: 66px;
+  }
+  .linkBlockText > h6 {
+    font-size: 12px;
+    line-height: 14.4px;
+  }
+  .osLogo {
+    min-width: 59px;
+    max-width: 59px;
+    min-height: 59px;
+  }
+  .osLink {
+    min-width: 9px;
+    max-width: 9px;
+    min-height: 9px;
+    margin-left: 5px;
+    margin-top: 3px;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 720px) {
+  .addresses {
+    width: 88.888vw;
+    padding: 7.917vw 5.556vw 0 5.556vw;
+    height: 44.028vw;
+  }
+  .msk,
+  .nn,
+  .tln {
+    height: 9.861vw;
+    width: 27.083vw;
+  }
+  .msk,
+  .nn,
+  .tln > h6 {
+    font-size: 1.667vw;
+    line-height: 2vw;
+  }
+  .nn {
+    margin-left: 4.167vw;
+  }
+  .tallin {
+    width: 100%;
+    height: 30.833vw;
+  }
+  .tallinInfo {
+    padding: 3.056vw 4.0278vw 3.056vw 4.167vw;
+    height: 24.722vw;
+  }
+  .linkBlockText {
+    height: 9.167vw;
+  }
+  .linkBlockText > h6 {
+    font-size: 1.667vw;
+    line-height: 2vw;
+  }
+  .osLogo {
+    min-width: 8.194vw;
+    max-width: 8.194vw;
+    min-height: 8.194vw;
+  }
+  .osLink {
+    min-width: 1.25vw;
+    max-width: 1.25vw;
+    min-height: 1.25vw;
+    margin-left: 0.694vw;
+    margin-top: 0.4167vw;
+  }
+  h6 {
+    font-size: 1.667vw;
+    line-height: 2vw;
+  }
+}
+
+//360px
+@media (max-width: $mobile) {
+  .addresses {
+    width: 100vw;
+    padding: 13.8889vw 0 0 0;
+    height: 90.833vw;
+  }
+  .msk,
+  .nn,
+  .tln {
+    height: 63px;
+    width: 131px;
+  }
+  .msk,
+  .nn,
+  .tln > h6 {
+    font-size: 12px;
+    line-height: 14.4px;
+  }
+  .nn {
+    margin-left: 25px;
+  }
+  .msk {
+    margin-left: 30px;
+  }
+  .tallin {
+    height: 61.667vw;
+  }
+}
+
+@media (max-width: $under-mobile) {
+  .msk,
+  .nn,
+  .tln {
+    height: 0.175vw;
+    width: 36.389vw;
+  }
+  .msk,
+  .nn,
+  .tln > h6 {
+    font-size: 3.333vw;
+    line-height: 4vw;
+  }
+  .nn {
+    margin-left: 6.944vw;
+  }
+  .msk {
+    margin-left: 8.333vw;
+  }
+  .tallinInfo {
+    padding: 6.111vw 8.333vw 6.111vw 8.333vw;
+    height: 49.444vw;
+  }
+  .mainLinkBlock,
+  .linkBlockText {
+    height: 18.889vw;
+  }
+  .linkBlockText {
+    height: 18.333vw;
+  }
+  .tln {
+    width: 80vw;
+  }
+  .osLogo {
+    min-width: 16.389vw;
+    max-width: 16.389vw;
+    min-height: 16.389vw;
+  }
+  .linkBlockText > h6 {
+    font-size: 3.333vw;
+    line-height: 4vw;
+  }
+  .osLink {
+    min-width: 2.5vw;
+    max-width: 2.5vw;
+    min-height: 2.5vw;
+    margin-left: 1.389vw;
+    margin-top: 0.833vw;
   }
 }
 </style>
