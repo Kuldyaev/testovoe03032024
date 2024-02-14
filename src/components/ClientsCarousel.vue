@@ -1,8 +1,8 @@
 <template>
   <FlexBox w="100%" direction="column">
-    <div class="carousel">
-      <p>Наши клиенты</p>
-    </div>
+    <Carousel>
+      <CarouselSlide />
+    </Carousel>
     <div class="carouselFooter">
       <div class="avWorkTime"></div>
     </div>
@@ -11,6 +11,8 @@
 
 <script setup lang="ts">
 import FlexBox from "./FlexBox.vue";
+import Carousel from "./uikit/Carousel.vue";
+import CarouselSlide from "./uikit/CarouselSlide.vue";
 </script>
 
 <style scoped lang="scss">
@@ -21,7 +23,7 @@ p {
   margin: 0;
 }
 
-.carousel {
+.carouselDesk {
   width: 100%;
   display: flex;
 }
