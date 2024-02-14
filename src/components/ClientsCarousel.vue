@@ -1,10 +1,14 @@
 <template>
   <FlexBox w="100%" direction="column">
-    <Carousel>
-      <CarouselSlide />
-    </Carousel>
+    <FlexBox class="carouselContainer">
+      <Carousel />
+    </FlexBox>
     <div class="carouselFooter">
       <div class="avWorkTime"></div>
+      <FlexBox w="130px" m="0 30px 0 0" justify="between">
+        <Button @click="console.log('test1')" />
+        <Button @click="console.log('test2')" />
+      </FlexBox>
     </div>
   </FlexBox>
 </template>
@@ -12,7 +16,7 @@
 <script setup lang="ts">
 import FlexBox from "./FlexBox.vue";
 import Carousel from "./uikit/Carousel.vue";
-import CarouselSlide from "./uikit/CarouselSlide.vue";
+import Button from "./uikit/Button.vue";
 </script>
 
 <style scoped lang="scss">
@@ -27,7 +31,13 @@ p {
   width: 100%;
   display: flex;
 }
-
+.carouselContainer {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  width: 100vw;
+  height: 507px;
+}
 .carouselFooter {
   display: flex;
   justify-content: space-between;
