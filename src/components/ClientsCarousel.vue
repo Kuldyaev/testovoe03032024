@@ -1,25 +1,136 @@
 <template>
   <FlexBox w="100%" direction="column">
     <FlexBox class="carouselContainer">
-      <Carousel />
+      <Carousel
+        :widthCarousel="state.widthCarousel"
+        :leftCarousel="state.leftCarousel"
+        :rightCarousel="state.rightCarousel"
+        :carouselSlides="state.carouselSlides"
+      />
     </FlexBox>
     <div class="carouselFooter">
       <div class="avWorkTime"></div>
       <FlexBox w="130px" m="0 30px 0 0" justify="between">
-        <Button @click="console.log('test1')" />
-        <Button @click="console.log('test2')" />
+        <Button
+          @click="
+            {
+              state.moveToLeft = true;
+              state.moveToRight = false;
+            }
+          "
+          @stopmoving="
+            {
+              state.moveToLeft = false;
+              state.moveToRight = false;
+            }
+          "
+        />
+        <Button
+          @click="
+            {
+              state.moveToLeft = false;
+              state.moveToRight = true;
+            }
+          "
+          @stopmoving="
+            {
+              state.moveToLeft = false;
+              state.moveToRight = false;
+            }
+          "
+        />
+        <FlexBox>
+          <h3 v-show="state.moveToLeft">Left</h3>
+          <h3 v-show="state.moveToRight">Right</h3>
+        </FlexBox>
       </FlexBox>
     </div>
   </FlexBox>
 </template>
 
 <script setup lang="ts">
+import { reactive, watch } from "vue";
 import FlexBox from "./FlexBox.vue";
 import Carousel from "./uikit/Carousel.vue";
 import Button from "./uikit/Button.vue";
+
+interface stateT {
+  carouselSlides: number[];
+  widthCarousel: number;
+  leftCarousel: number;
+  rightCarousel: number;
+  moveCarousel: number;
+  moveToLeft: boolean;
+  moveToRight: boolean;
+  interval: number | undefined;
+}
+
+const speedCarousel = 5;
+const state: stateT = reactive({
+  carouselSlides: [1, 1, 1],
+  widthCarousel: 300,
+  leftCarousel: -100,
+  rightCarousel: 0,
+  moveCarousel: 0,
+  moveToLeft: false,
+  moveToRight: false,
+  interval: undefined,
+});
+
+watch(
+  () => [state.moveToRight, state.moveToLeft],
+  () => {
+    if (state.moveToRight) {
+      state.leftCarousel = state.leftCarousel + speedCarousel;
+      state.interval = setInterval(moveRigth, 250);
+    }
+    if (state.moveToLeft) {
+      state.leftCarousel = state.leftCarousel - speedCarousel;
+      state.interval = setInterval(moveLeft, 250);
+    }
+    if (
+      !state.moveToLeft &&
+      !state.moveToRight &&
+      state.interval !== undefined
+    ) {
+      clearInterval(state.interval);
+      state.interval = undefined;
+    }
+  }
+);
+
+// watch(
+//   () => [props.moveCarousel, props.moveLeft, props.moveRight],
+//   () => {
+//     if (+props.moveCarousel > 0) {
+//       slideCarouselLeft.value = String(-1 * props.moveCarousel) + "vw";
+//       slideCarouselRight.value = "none";
+//     } else if (+props.moveCarousel < 0) {
+//       slideCarouselLeft.value = "none";
+//       slideCarouselRight.value = String(-1 * props.moveCarousel) + "vw";
+//     } else {
+//       slideCarouselLeft.value = "0vw";
+//       slideCarouselRight.value = "0vw";
+//     }
+//   }
+// );
+
+const moveLeft = () => {
+  console.log("test");
+  state.leftCarousel = state.leftCarousel - speedCarousel;
+};
+
+const moveRigth = () => {
+  console.log("test");
+  state.leftCarousel = state.leftCarousel + speedCarousel;
+};
 </script>
 
 <style scoped lang="scss">
+h3 {
+  color: white;
+}
+
 p {
   color: $primary-gray;
   font-family: "MabryPro";
