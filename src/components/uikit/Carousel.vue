@@ -7,14 +7,21 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import CarouselSlide from "./CarouselSlide.vue";
 
-defineProps([
+const props = defineProps([
   "widthCarousel",
   "leftCarousel",
   "rightCarousel",
   "carouselSlides",
 ]);
+
+const left = computed(() => {
+  return String(props.leftCarousel) + "vw";
+});
+const right = "none";
+const width = String(props.widthCarousel) + "vw";
 </script>
 
 <style scoped lang="scss">
@@ -31,9 +38,9 @@ li {
   z-index: 1;
   display: flex;
   flex-direction: row;
-  left: v-bind(leftCarousel);
-  right: v-bind(rightCarousel);
-  width: v-bind(widthCarousel);
-  transition: left, right 0.6s linear;
+  left: v-bind(left);
+  right: v-bind(right);
+  width: v-bind(width);
+  transition: left 0.8s linear;
 }
 </style>

@@ -39,36 +39,62 @@
             }
           "
         />
+        <FlexBox>
+          <h3 v-show="state.moveToLeft">Left</h3>
+          <h3 v-show="state.moveToRight">Right</h3>
+        </FlexBox>
       </FlexBox>
     </div>
   </FlexBox>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch } from "vue";
+import { reactive, watch } from "vue";
 import FlexBox from "./FlexBox.vue";
 import Carousel from "./uikit/Carousel.vue";
 import Button from "./uikit/Button.vue";
 
-const speedCarousel = 10;
-const state = reactive({
+interface stateT {
+  carouselSlides: number[];
+  widthCarousel: number;
+  leftCarousel: number;
+  rightCarousel: number;
+  moveCarousel: number;
+  moveToLeft: boolean;
+  moveToRight: boolean;
+  interval: number | undefined;
+}
+
+const speedCarousel = 5;
+const state: stateT = reactive({
   carouselSlides: [1, 1, 1],
-  widthCarousel: "300vw",
-  leftCarousel: "-100vw",
-  rightCarousel: "none",
+  widthCarousel: 300,
+  leftCarousel: -100,
+  rightCarousel: 0,
   moveCarousel: 0,
   moveToLeft: false,
   moveToRight: false,
+  interval: undefined,
 });
 
 watch(
-  () => [state.moveToRight, state.moveToLeft, state.moveCarousel],
+  () => [state.moveToRight, state.moveToLeft],
   () => {
     if (state.moveToRight) {
-      setTimeout(moveRigth, 500);
+      state.leftCarousel = state.leftCarousel + speedCarousel;
+      state.interval = setInterval(moveRigth, 250);
     }
     if (state.moveToLeft) {
-      setTimeout(moveLeft, 500);
+      state.leftCarousel = state.leftCarousel - speedCarousel;
+      state.interval = setInterval(moveLeft, 250);
+    }
+    if (
+      !state.moveToLeft &&
+      !state.moveToRight &&
+      state.interval !== undefined
+    ) {
+      clearInterval(state.interval);
+      state.interval = undefined;
     }
   }
 );
@@ -90,11 +116,13 @@ watch(
 // );
 
 const moveLeft = () => {
-  state.moveCarousel = state.moveCarousel - speedCarousel;
+  console.log("test");
+  state.leftCarousel = state.leftCarousel - speedCarousel;
 };
 
 const moveRigth = () => {
-  state.moveCarousel = state.moveCarousel + speedCarousel;
+  console.log("test");
+  state.leftCarousel = state.leftCarousel + speedCarousel;
 };
 </script>
 
