@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, toRefs, reactive } from "vue";
+import { withDefaults, toRefs, reactive } from "vue";
 import { FlexBoxProps } from "@/shared/types";
 
 const JUS_ALIAS = {

@@ -1,11 +1,11 @@
 <template>
-  <button @click="$emit('click')">
+  <button @mousedown="$emit('click')" @mouseup="$emit('stopmoving')">
     <span>Кнопка</span>
   </button>
 </template>
 
 <script setup lang="ts">
-const emits = defineEmits(["click"]);
+const emits = defineEmits(["click", "stopmoving"]);
 </script>
 
 <style scoped lang="scss">
