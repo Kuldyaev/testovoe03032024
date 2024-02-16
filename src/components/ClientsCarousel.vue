@@ -1,7 +1,7 @@
 <template>
   <FlexBox w="100%" direction="column">
     <FlexBox class="carouselContainer">
-      <Carousel />
+      <Carousel :moveCarousel="moveCarousel" />
     </FlexBox>
     <div class="carouselFooter">
       <div class="avWorkTime"></div>
@@ -17,6 +17,8 @@
 import FlexBox from "./FlexBox.vue";
 import Carousel from "./uikit/Carousel.vue";
 import Button from "./uikit/Button.vue";
+
+const moveCarousel: number = 0;
 </script>
 
 <style scoped lang="scss">

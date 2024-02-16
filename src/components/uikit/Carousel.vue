@@ -8,8 +8,13 @@
 
 <script setup lang="ts">
 import CarouselSlide from "./CarouselSlide.vue";
-
+import { computed } from "vue";
+const props = defineProps(["moveCarousel"]);
 const carouselSlides = [0, 1, 2];
+
+const slideCarousel = computed(() => {
+  String(props.moveCarousel) + "vw";
+});
 </script>
 
 <style scoped lang="scss">
@@ -26,6 +31,6 @@ li {
   z-index: 1;
   display: flex;
   flex-direction: row;
-  left: -70vw;
+  left: v-bind(slideCarousel);
 }
 </style>
