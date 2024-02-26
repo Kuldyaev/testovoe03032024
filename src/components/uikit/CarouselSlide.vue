@@ -6,7 +6,7 @@
       v-for="(client, index) in clients"
       :key="index"
     >
-      <FlexBox class="clientLogoPlace"></FlexBox>
+      <FlexBox :class="'clientLogoPlace bgImg' + index"></FlexBox>
       <p>{{ client.time }}</p>
     </FlexBox>
   </FlexBox>
@@ -36,8 +36,6 @@ p {
   min-width: 100vw;
   height: 507px;
   flex-wrap: wrap;
-
-  background-image: linear-gradient(to bottom right, #ee82ee, #ff0000);
 }
 .carouselSlideItem {
   width: 360px;
@@ -47,6 +45,41 @@ p {
 .clientLogoPlace {
   width: 100%;
   height: 134px;
-  background-color: aqua !important;
+}
+
+.bgImg0,
+.bgImg1,
+.bgImg2,
+.bgImg3,
+.bgImg4,
+.bgImg5,
+.bgImg6,
+.bgImg7 {
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.bgImg0 {
+  background-image: url("~@/assets/img/png/bgImg_0.png");
+}
+.bgImg1 {
+  background-image: url("~@/assets/img/png/bgImg_1.png");
+}
+.bgImg2 {
+  background-image: url("~@/assets/img/png/bgImg_2.png");
+}
+.bgImg3 {
+  background-image: url("~@/assets/img/png/bgImg_3.png");
+}
+.bgImg4 {
+  background-image: url("~@/assets/img/png/bgImg_4.png");
+}
+.bgImg5 {
+  background-image: url("~@/assets/img/png/bgImg_5.png");
+}
+.bgImg6 {
+  background-image: url("~@/assets/img/png/bgImg_6.png");
+}
+.bgImg7 {
+  background-image: url("~@/assets/img/png/bgImg_7.png");
 }
 </style>
