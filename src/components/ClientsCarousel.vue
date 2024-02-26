@@ -39,10 +39,6 @@
             }
           "
         />
-        <FlexBox>
-          <h3 v-show="state.moveToLeft">Left</h3>
-          <h3 v-show="state.moveToRight">Right</h3>
-        </FlexBox>
       </FlexBox>
     </div>
   </FlexBox>
