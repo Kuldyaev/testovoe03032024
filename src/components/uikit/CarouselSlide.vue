@@ -31,6 +31,12 @@ const clients = [
 p {
   margin: 0;
   padding: 0;
+  font-size: 20px;
+  line-height: 25px;
+  font-weight: 400;
+  letter-spacing: 2%;
+  color: $additional-grey;
+  user-select: none;
 }
 .carouselSlide {
   min-width: 100vw;
