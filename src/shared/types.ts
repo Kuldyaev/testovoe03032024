@@ -22,7 +22,7 @@ export interface FlexBoxProps {
   hide?: boolean;
   shrink?: number;
   grow?: number;
-  gap?: number;
+  gap?: number | string;
   w?: string;
   h?: string;
   m?: string;
