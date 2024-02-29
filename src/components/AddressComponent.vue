@@ -202,7 +202,7 @@ a {
   margin-left: 7px;
   margin-top: 5px;
   background-image: url("~@/assets/img/svg/link.svg");
-  background-size: contain;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 

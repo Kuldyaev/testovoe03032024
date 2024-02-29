@@ -1,20 +1,25 @@
 <template>
-  <section>
+  <section class="formPlace">
+    <Loader />
     <p>Form</p>
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Loader from "./Loader.vue";
+</script>
 
 <style scoped lang="scss">
-section {
+.formPlace {
+  padding: 0;
+  margin: 0;
   width: 50%;
   background-color: $white;
   color: $black;
 }
 
 @media (max-width: $small-screen) {
-  section {
+  .formPlace {
     width: 100%;
   }
 }
