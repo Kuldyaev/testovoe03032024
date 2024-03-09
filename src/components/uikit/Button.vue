@@ -1,11 +1,23 @@
 <template>
-  <button @mousedown="$emit('click')" @mouseup="$emit('stopmoving')">
+  <button
+    @mousedown="$emit('click')"
+    @mouseup="$emit('stopmoving')"
+    :class="classBtn"
+  >
     <span>Кнопка</span>
   </button>
 </template>
 
 <script setup lang="ts">
+import { withDefaults } from "vue";
+import { BtnProps } from "@/shared/types";
+
+const props = withDefaults(defineProps<BtnProps>(), {
+  class: "",
+});
+
 const emits = defineEmits(["click", "stopmoving"]);
+const classBtn = "uiBtn " + String(props.class);
 </script>
 
 <style scoped lang="scss">
