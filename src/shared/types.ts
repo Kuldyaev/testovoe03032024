@@ -31,3 +31,7 @@ export interface FlexBoxProps {
   overflow?: "auto" | "hidden" | "visible" | "scroll";
   bgcolor?: string;
 }
+
+export interface BtnProps {
+  class?: string;
+}
