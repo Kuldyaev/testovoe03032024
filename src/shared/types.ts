@@ -33,5 +33,16 @@ export interface FlexBoxProps {
 }
 
 export interface BtnProps {
+  category?: "primary" | "close";
   class?: string;
+  w?: string;
+  h?: string;
+}
+export interface RequestFormProps {
+  width: number;
+}
+
+export interface stateFS {
+  closeIconWidth: number;
+  closeIconHeght: number;
 }

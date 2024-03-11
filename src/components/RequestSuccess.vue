@@ -1,14 +1,41 @@
 <template>
   <FlexBox class="info" direction="column" align="start" justify="start">
     <FlexBox class="closeBtnPlace" align="end" justify="end">
-      <button>x</button>
+      <Button
+        category="close"
+        @close="console.log('close')"
+        :w="String(state.closeIconWidth) + 'px'"
+        :h="String(state.closeIconHeght) + 'px'"
+      />
     </FlexBox>
     <FlexBox class="messagePlace">GOOD</FlexBox>
   </FlexBox>
 </template>
 
 <script setup lang="ts">
+import { reactive, watch } from "vue";
+import { RequestFormProps, stateFS } from "@/shared/types";
 import FlexBox from "./FlexBox.vue";
+import Button from "./uikit/Button.vue";
+
+const props = defineProps<RequestFormProps>();
+const state: stateFS = reactive({
+  closeIconWidth: 0,
+  closeIconHeght: 0,
+});
+
+watch(
+  () => [props.width],
+  () => {
+    if (props.width > 768) {
+      state.closeIconWidth = Math.round((props.width * 32) / 1920);
+      state.closeIconHeght = Math.round((props.width * 33) / 1920);
+    } else {
+      state.closeIconWidth = Math.round((props.width * 32) / 960);
+      state.closeIconHeght = Math.round((props.width * 33) / 960);
+    }
+  }
+);
 </script>
 
 <style scoped lang="scss">
@@ -21,8 +48,8 @@ import FlexBox from "./FlexBox.vue";
   height: 76.405vw;
 }
 .closeBtnPlace {
-  width: 93.5416%;
-  height: 6.4758%;
+  width: 46.7708vw;
+  height: 4.9479vw;
 }
 .messagePlace {
   width: 67.5%;
@@ -36,6 +63,10 @@ import FlexBox from "./FlexBox.vue";
     width: 100vw;
     height: 152.81vw;
     position: relative;
+  }
+  .closeBtnPlace {
+    width: 93.5416vw;
+    height: 9.8958vw;
   }
 }
 </style>

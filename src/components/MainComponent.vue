@@ -39,7 +39,7 @@
       </FlexBox>
       <AddressComponent v-if="screenWidth > 768" :screenWidth="screenWidth" />
     </section>
-    <RequestForm />
+    <RequestForm :width="screenWidth" />
     <AddressComponent v-if="screenWidth <= 768" :screenWidth="screenWidth" />
   </main>
 </template>
