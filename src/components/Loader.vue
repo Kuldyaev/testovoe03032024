@@ -39,6 +39,7 @@ import FlexBox from "./FlexBox.vue";
   .loaderPlace {
     width: 100vw;
     height: 152.81vw;
+    position: relative;
   }
   .loader {
     width: 17.083vw;

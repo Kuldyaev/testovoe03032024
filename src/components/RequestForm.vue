@@ -13,7 +13,7 @@ import RequestSuccess from "./RequestSuccess.vue";
 import RequestError from "./RequestError.vue";
 import FormActive from "./FormActive.vue";
 
-const RequestStage: number = 0;
+const RequestStage: number = 2;
 </script>
 
 <style scoped lang="scss">
