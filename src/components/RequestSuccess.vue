@@ -77,12 +77,19 @@ watch(
   text-align: left;
   margin-top: 2.9167vw;
   margin-bottom: 0;
+  color: $text-black;
+  user-select: none;
 }
 
 .text {
   margin-top: 2.9167vw;
   font-size: 1.3542vw;
   line-height: 2.1667vw;
+  text-align: justify;
+  margin-top: 2.9167vw;
+  color: $text-black;
+  letter-spacing: normal;
+  user-select: none;
 }
 
 .successSign {
