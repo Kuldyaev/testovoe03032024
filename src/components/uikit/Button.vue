@@ -57,4 +57,7 @@ button {
   background-size: contain;
   background-repeat: no-repeat;
 }
+.closeBtn:hover {
+  transform: scale(1.05);
+}
 </style>
