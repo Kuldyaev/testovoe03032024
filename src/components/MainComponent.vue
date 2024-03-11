@@ -39,7 +39,7 @@
       </FlexBox>
       <AddressComponent v-if="screenWidth > 768" :screenWidth="screenWidth" />
     </section>
-    <RequestForm />
+    <RequestForm :width="screenWidth" />
     <AddressComponent v-if="screenWidth <= 768" :screenWidth="screenWidth" />
   </main>
 </template>
@@ -105,7 +105,9 @@ a {
 @media (min-width: $over-big-screen) {
   section {
     padding: 6.146vw 0 0 6.25vw;
+    width: 43.75vw;
   }
+
   h3 {
     width: 25.573vw;
     height: auto;
@@ -128,6 +130,7 @@ a {
 @media (max-width: $big-screen) {
   section {
     padding: 118px 0 0 120px;
+    width: calc(50vw - 120px);
   }
   h3 {
     width: 491px;
@@ -150,6 +153,7 @@ a {
 @media (min-width: 1281px) and (max-width: 1899px) {
   section {
     padding: 118px 0 0 6.316vw;
+    width: 43.684vw;
   }
   h3 {
     width: 25.842vw;
@@ -173,6 +177,7 @@ a {
 @media (max-width: $middle-screen) {
   section {
     padding: 78px 0 0 80px;
+    width: calc(50vw - 80px);
   }
   h1 {
     margin-bottom: 36.5px;
@@ -198,6 +203,7 @@ a {
 @media (min-width: 769px) and (max-width: 1024px) {
   section {
     padding: 78px 0 0 7.8125vw;
+    width: 42.1875vw;
   }
   h3 {
     width: 32.031vw;

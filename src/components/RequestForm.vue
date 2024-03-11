@@ -2,18 +2,29 @@
   <section class="formPlace">
     <FormActive v-if="RequestStage === 0" />
     <Loader v-if="RequestStage === 1" />
-    <RequestSuccess v-if="RequestStage === 2" />
-    <RequestError v-if="RequestStage === 3" />
+    <RequestSuccess
+      v-if="RequestStage === 2"
+      :width="width"
+      @close="RequestStage = 0"
+    />
+    <RequestError
+      v-if="RequestStage === 3"
+      :width="width"
+      @close="RequestStage = 0"
+    />
   </section>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+import { RequestFormProps } from "@/shared/types";
 import Loader from "./Loader.vue";
 import RequestSuccess from "./RequestSuccess.vue";
 import RequestError from "./RequestError.vue";
 import FormActive from "./FormActive.vue";
 
-const RequestStage: number = 0;
+const props = defineProps<RequestFormProps>();
+const RequestStage = ref<number>(2);
 </script>
 
 <style scoped lang="scss">
@@ -21,7 +32,7 @@ const RequestStage: number = 0;
   padding: 0;
   margin: 0;
   width: 50%;
-  background-color: $white;
+  background-color: $secondary-gray;
   color: $black;
 }
 
