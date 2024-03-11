@@ -12,6 +12,7 @@
       <div class="avWorkTime"></div>
       <FlexBox w="130px" m="0 30px 0 0" justify="between">
         <Button
+          category="circleLeft"
           @click="
             {
               state.moveToLeft = true;
@@ -26,6 +27,7 @@
           "
         />
         <Button
+          category="circleRight"
           @click="
             {
               state.moveToLeft = false;

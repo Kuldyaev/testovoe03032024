@@ -2,17 +2,29 @@
   <button
     @click="$emit('close')"
     class="closeBtn"
-    v-if="typeBtn === 'close'"
+    v-show="typeBtn === 'close'"
   ></button>
   <button
     @mousedown="$emit('click')"
     @mouseup="$emit('stopmoving')"
     :class="classBtn"
-    v-if="typeBtn === 'primary'"
+    v-show="typeBtn === 'primary'"
   >
     >
     <span>Кнопка</span>
   </button>
+  <button
+    @mousedown="$emit('click')"
+    @mouseup="$emit('stopmoving')"
+    :class="classBtn"
+    v-show="typeBtn === 'circleLeft'"
+  ></button>
+  <button
+    @mousedown="$emit('click')"
+    @mouseup="$emit('stopmoving')"
+    :class="classBtn"
+    v-show="typeBtn === 'circleRight'"
+  ></button>
 </template>
 
 <script setup lang="ts">
@@ -27,7 +39,7 @@ const props = withDefaults(defineProps<BtnProps>(), {
 });
 
 const emits = defineEmits(["click", "stopmoving", "close"]);
-const classBtn = "uiBtn " + String(props.class);
+const classBtn = "uiBtn " + String(props.class) + " " + String(props.category);
 const typeBtn = String(props.category);
 </script>
 
@@ -52,6 +64,19 @@ button {
   background: rgb(129 129 139 / 95%);
   color: $primary-blue;
 }
+.circleLeft,
+.circleRight {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: $primary-blue;
+}
+
+.circleLeft:hover,
+.circleRight:hover {
+  opacity: 0.9;
+}
+
 .closeBtn {
   background-image: url("~@/assets/img/svg/close-button.svg");
   background-size: contain;

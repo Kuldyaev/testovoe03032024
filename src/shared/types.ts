@@ -33,7 +33,7 @@ export interface FlexBoxProps {
 }
 
 export interface BtnProps {
-  category?: "primary" | "close";
+  category?: "primary" | "close" | "circleLeft" | "circleRight";
   class?: string;
   w?: string;
   h?: string;
