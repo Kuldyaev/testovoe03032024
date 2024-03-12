@@ -2,6 +2,7 @@
   <FlexBox class="info" direction="column" align="start" justify="start">
     <FlexBox class="closeBtnPlace" align="end" justify="end">
       <Button
+        class="closeBtn"
         category="close"
         @close="$emit('close')"
         :w="String(state.closeIconWidth) + 'px'"
@@ -21,7 +22,12 @@
         Пожалуйста, проверьте ваше <br />подключение к интернету и попробуйте
         отправить сообщение еще раз
       </h4>
-      <Button w="100px" h="25px" category="primary" />
+      <Button
+        text="Отправить заново"
+        category="primary"
+        class="sendAgain"
+        @close="$emit('sendagain')"
+      />
     </FlexBox>
   </FlexBox>
 </template>
@@ -32,7 +38,7 @@ import { RequestFormProps, stateFS } from "@/shared/types";
 import FlexBox from "./FlexBox.vue";
 import Button from "./uikit/Button.vue";
 
-const emits = defineEmits(["close"]);
+const emits = defineEmits(["close", "sendagain"]);
 const props = defineProps<RequestFormProps>();
 const state: stateFS = reactive({
   closeIconWidth: Math.round((props.width * 32) / 1920),
@@ -103,6 +109,12 @@ watch(
   background-repeat: no-repeat;
 }
 
+.sendAgain {
+  width: 19.4792vw;
+  height: 4.8953vw;
+  margin-top: 2.9167vw;
+}
+
 @media (max-width: $small-screen) {
   .info {
     width: 100vw;
@@ -128,6 +140,11 @@ watch(
     margin-top: 5.8333vw;
     font-size: 2.7083vw;
     line-height: 4.3333vw;
+  }
+  .sendAgain {
+    margin-top: 5.8333vw;
+    width: 38.9583vw;
+    height: 9.7917vw;
   }
 }
 </style>

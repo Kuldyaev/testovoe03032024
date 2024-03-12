@@ -11,6 +11,7 @@
       v-if="RequestStage === 3"
       :width="width"
       @close="RequestStage = 0"
+      @sendagain="console.log('sendagainBtn')"
     />
   </section>
 </template>

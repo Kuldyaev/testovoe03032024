@@ -2,6 +2,7 @@
   <FlexBox class="info" direction="column" align="start" justify="start">
     <FlexBox class="closeBtnPlace" align="end" justify="end">
       <Button
+        class="closeBtn"
         category="close"
         @close="$emit('close')"
         :w="String(state.closeIconWidth) + 'px'"

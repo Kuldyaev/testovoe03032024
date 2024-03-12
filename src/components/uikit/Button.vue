@@ -1,30 +1,12 @@
 <template>
   <button
+    @mousedown="$emit('click')"
+    @mouseup="$emit('stopmoving')"
     @click="$emit('close')"
-    class="closeBtn"
-    v-show="typeBtn === 'close'"
-  ></button>
-  <button
-    @mousedown="$emit('click')"
-    @mouseup="$emit('stopmoving')"
     :class="classBtn"
-    v-show="typeBtn === 'primary'"
   >
-    >
-    <span>Кнопка</span>
+    <span v-if="typeBtn === 'primary'">{{ text }}</span>
   </button>
-  <button
-    @mousedown="$emit('click')"
-    @mouseup="$emit('stopmoving')"
-    :class="classBtn"
-    v-show="typeBtn === 'circleLeft'"
-  ></button>
-  <button
-    @mousedown="$emit('click')"
-    @mouseup="$emit('stopmoving')"
-    :class="classBtn"
-    v-show="typeBtn === 'circleRight'"
-  ></button>
 </template>
 
 <script setup lang="ts">
@@ -36,6 +18,7 @@ const props = withDefaults(defineProps<BtnProps>(), {
   category: "primary",
   w: "auto",
   h: "auto",
+  text: "Кнопка",
 });
 
 const emits = defineEmits(["click", "stopmoving", "close"]);
@@ -51,18 +34,26 @@ button {
   height: v-bind(h);
 }
 
-.uiBtn {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+.sendAgain {
+  background-color: $primary-blue;
   color: $white;
+  border-radius: 16px;
 }
-.uiBtn:hover {
+.sendAgain:hover {
   opacity: 0.9;
 }
+// .uiBtn {
+//   width: 50px;
+//   height: 50px;
+//   border-radius: 50%;
+//   color: $white;
+// }
+// .uiBtn:hover {
+//   opacity: 0.9;
+// }
 .uiBtn:active {
   background: rgb(129 129 139 / 95%);
-  color: $primary-blue;
+  color: $primary-background;
 }
 .circleLeft,
 .circleRight {
@@ -70,6 +61,25 @@ button {
   height: 50px;
   border-radius: 50%;
   background-color: $primary-blue;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.circleLeft {
+  background-image: url("~@/assets/img/svg/arrowLeft.svg");
+}
+.circleLeft:active {
+  background-image: url("~@/assets/img/svg/arrowLeftBlack.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.circleRight {
+  background-image: url("~@/assets/img/svg/arrowRight.svg");
+}
+.circleRight:active {
+  background-image: url("~@/assets/img/svg/arrowRightBlack.svg");
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .circleLeft:hover,
