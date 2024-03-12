@@ -11,6 +11,7 @@
       v-if="RequestStage === 3"
       :width="width"
       @close="RequestStage = 0"
+      @sendagain="console.log('sendagainBtn')"
     />
   </section>
 </template>
@@ -24,7 +25,7 @@ import RequestError from "./RequestError.vue";
 import FormActive from "./FormActive.vue";
 
 const props = defineProps<RequestFormProps>();
-const RequestStage = ref<number>(2);
+const RequestStage = ref<number>(3);
 </script>
 
 <style scoped lang="scss">
