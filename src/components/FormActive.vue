@@ -1,6 +1,7 @@
 <template>
   <FlexBox class="info">
     <FlexBox>Form</FlexBox>
+    tHIS IS ACTIVE FORM
   </FlexBox>
 </template>
 
