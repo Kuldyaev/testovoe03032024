@@ -25,7 +25,7 @@ import RequestError from "./RequestError.vue";
 import FormActive from "./FormActive.vue";
 
 const props = defineProps<RequestFormProps>();
-const RequestStage = ref<number>(3);
+const RequestStage = ref<number>(0);
 </script>
 
 <style scoped lang="scss">
