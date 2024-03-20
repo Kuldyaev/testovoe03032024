@@ -33,7 +33,7 @@ export interface FlexBoxProps {
 }
 
 export interface BtnProps {
-  category?: "primary" | "close" | "circleLeft" | "circleRight";
+  category?: "primary" | "close" | "circleLeft" | "circleRight" | "formSubmit";
   class?: string;
   w?: string;
   h?: string;

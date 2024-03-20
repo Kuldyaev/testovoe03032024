@@ -5,7 +5,9 @@
     @click="$emit('close')"
     :class="classBtn"
   >
-    <span v-if="typeBtn === 'primary'">{{ text }}</span>
+    <span v-if="typeBtn === 'primary' || typeBtn === 'formSubmit'">{{
+      text
+    }}</span>
   </button>
 </template>
 
@@ -34,10 +36,13 @@ button {
   height: v-bind(h);
 }
 
-.sendAgain {
+.sendAgain,
+.formSubmit {
   background-color: $primary-blue;
   color: $white;
   border-radius: 16px;
+  min-width: 20px;
+  min-height: 20px;
 }
 .sendAgain:hover {
   opacity: 0.9;
@@ -51,7 +56,8 @@ button {
 // .uiBtn:hover {
 //   opacity: 0.9;
 // }
-.uiBtn:active {
+.uiBtn:active,
+.formSubmit:active {
   background: rgb(129 129 139 / 95%);
   color: $primary-background;
 }

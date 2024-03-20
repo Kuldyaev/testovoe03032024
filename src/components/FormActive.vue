@@ -40,6 +40,21 @@
       </form>
     </FlexBox>
     tHIS IS ACTIVE FORM
+
+    <FlexBox justify="start" w="100%">
+      <Button
+        category="formSubmit"
+        text="Оставить заявку"
+        @click="console.log('nsdlknfl')"
+        @stopmoving="console.log('nsdlknfl')"
+      />
+    </FlexBox>
+    <FlexBox direction="column" justify="start" w="100%">
+      <h5>
+        <span class="op04">Нажав на кнопку, вы соглашаетесь с политикой</span>
+      </h5>
+      <h5><a href="#">обработки персональных данных</a></h5>
+    </FlexBox>
   </FlexBox>
 </template>
 
@@ -48,4 +63,16 @@ import FlexBox from "./FlexBox.vue";
 import Button from "./uikit/Button.vue";
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+h5 {
+  color: $text-black;
+  text-align: start;
+  width: 100%;
+}
+a {
+  text-decoration: none;
+}
+.op04 {
+  opacity: 0.4;
+}
+</style>
