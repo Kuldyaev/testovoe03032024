@@ -1,6 +1,6 @@
 <template>
   <section class="formPlace">
-    <FormActive v-if="RequestStage === 0" />
+    <FormActive v-if="RequestStage === 0" @close="sendRequest" />
     <Loader v-if="RequestStage === 1" />
     <RequestSuccess
       v-if="RequestStage === 2"
@@ -11,7 +11,7 @@
       v-if="RequestStage === 3"
       :width="width"
       @close="RequestStage = 0"
-      @sendagain="console.log('sendagainBtn')"
+      @sendagain="sendRequest"
     />
   </section>
 </template>
@@ -26,6 +26,13 @@ import FormActive from "./FormActive.vue";
 
 const props = defineProps<RequestFormProps>();
 const RequestStage = ref<number>(0);
+
+function sendRequest() {
+  RequestStage.value = 1;
+  setTimeout(() => {
+    RequestStage.value = 3;
+  }, 4000);
+}
 </script>
 
 <style scoped lang="scss">
