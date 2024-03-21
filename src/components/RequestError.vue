@@ -23,9 +23,9 @@
         отправить сообщение еще раз
       </h4>
       <Button
-        text="Отправить заново"
-        category="primary"
         class="sendAgain"
+        category="formSubmit"
+        text="Отправить заново"
         @close="$emit('sendagain')"
       />
     </FlexBox>

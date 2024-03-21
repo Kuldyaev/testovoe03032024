@@ -5,7 +5,9 @@
     @click="$emit('close')"
     :class="classBtn"
   >
-    <span v-if="typeBtn === 'primary'">{{ text }}</span>
+    <span v-if="typeBtn === 'primary' || typeBtn === 'formSubmit'">{{
+      text
+    }}</span>
   </button>
 </template>
 
@@ -34,10 +36,13 @@ button {
   height: v-bind(h);
 }
 
-.sendAgain {
+.sendAgain,
+.formSubmit {
   background-color: $primary-blue;
   color: $white;
   border-radius: 16px;
+  min-width: 20px;
+  min-height: 20px;
 }
 .sendAgain:hover {
   opacity: 0.9;
@@ -51,7 +56,8 @@ button {
 // .uiBtn:hover {
 //   opacity: 0.9;
 // }
-.uiBtn:active {
+.uiBtn:active,
+.formSubmit:active {
   background: rgb(129 129 139 / 95%);
   color: $primary-background;
 }
@@ -94,5 +100,34 @@ button {
 }
 .closeBtn:hover {
   transform: scale(1.05);
+}
+
+.formSubmit {
+  width: calc(38.9583vw / 2);
+  height: calc(9.7917vw / 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.04165vw;
+  line-height: 1.5625vw;
+  border-radius: 0.8333vw;
+  font-weight: 500;
+}
+.formSubmit:hover {
+  background-color: $secondary-blue;
+}
+.formSubmit:active {
+  background-color: $active-blue;
+  color: $white;
+}
+
+@media (max-width: $small-screen) {
+  .formSubmit {
+    width: 38.9583vw;
+    height: 9.7917vw;
+    border-radius: 1.6667vw;
+    font-size: 2.0833vw;
+    line-height: 3.125vw;
+  }
 }
 </style>
