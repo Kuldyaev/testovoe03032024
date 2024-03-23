@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, watch } from "vue";
 import { withDefaults } from "vue";
 import { BtnProps } from "@/shared/types";
 
@@ -24,8 +25,15 @@ const props = withDefaults(defineProps<BtnProps>(), {
 });
 
 const emits = defineEmits(["click", "stopmoving", "close"]);
-const classBtn = "uiBtn " + String(props.class) + " " + String(props.category);
+const classBtn = ref<string>(
+  "uiBtn " + String(props.class) + " " + String(props.category)
+);
 const typeBtn = String(props.category);
+
+watch(props, () => {
+  classBtn.value =
+    "uiBtn " + String(props.class) + " " + String(props.category);
+});
 </script>
 
 <style scoped lang="scss">
@@ -117,9 +125,16 @@ button {
   //margin-right: 0.5729vw;
   border: 0.1042vw solid $additional-grey;
   border-radius: 0.8333vw;
+  font-size: 1.0417vw;
 }
 .primary:hover {
   background-color: $additional-darkgrey;
+}
+.active,
+.active:hover {
+  background-color: $primary-blue;
+  color: $white;
+  border: 0.1042vw solid $primary-blue;
 }
 
 @media (max-width: $small-screen) {
@@ -129,6 +144,7 @@ button {
     //margin-right: 1.1458vw;
     border: 0.2083vw solid $additional-grey;
     border-radius: 1.6667vw;
+    font-size: 2.0833vw;
   }
   .formSubmit {
     width: 38.9583vw;
@@ -136,6 +152,10 @@ button {
     border-radius: 1.6667vw;
     font-size: 2.0833vw;
     line-height: 3.125vw;
+  }
+  .active,
+  .active:hover {
+    border: 0.2083vw solid $primary-blue;
   }
 }
 </style>

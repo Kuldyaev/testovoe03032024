@@ -6,34 +6,12 @@
       </FlexBox>
       <FlexBox class="interestDesk" w="100%" justify="start" gap=" ">
         <Button
+          v-for="interest in interests"
+          :key="interest.id"
           category="primary"
-          @click="console.log('nsdlknfl')"
-          @stopmoving="console.log('nsdlknfl')"
-        />
-        <Button
-          category="primary"
-          @click="console.log('nsdlknfl')"
-          @stopmoving="console.log('nsdlknfl')"
-        />
-        <Button
-          category="primary"
-          @click="console.log('nsdlknfl')"
-          @stopmoving="console.log('nsdlknfl')"
-        />
-        <Button
-          category="primary"
-          @click="console.log('nsdlknfl')"
-          @stopmoving="console.log('nsdlknfl')"
-        />
-        <Button
-          category="primary"
-          @click="console.log('nsdlknfl')"
-          @stopmoving="console.log('nsdlknfl')"
-        />
-        <Button
-          category="primary"
-          @click="console.log('nsdlknfl')"
-          @stopmoving="console.log('nsdlknfl')"
+          :text="interest.text"
+          :class="interest.isActive ? 'active' : ''"
+          @click="$emit('choseInterest', interest.id)"
         />
       </FlexBox>
     </FlexBox>
@@ -46,7 +24,6 @@
         <input type="submit" value="Submit" />
       </form>
     </FlexBox>
-    tHIS IS ACTIVE FORM
 
     <FlexBox justify="start" w="100%" class="submitBtnPlace">
       <Button
@@ -67,8 +44,10 @@
 <script setup lang="ts">
 import FlexBox from "./FlexBox.vue";
 import Button from "./uikit/Button.vue";
+import { FormActiveProps } from "@/shared/types";
 
-const emits = defineEmits(["close"]);
+const emits = defineEmits(["close", "choseInterest"]);
+const props = defineProps<FormActiveProps>();
 </script>
 
 <style scoped lang="scss">
