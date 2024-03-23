@@ -47,3 +47,12 @@ export interface stateFS {
   closeIconWidth: number;
   closeIconHeght: number;
 }
+
+export interface interest {
+  id: number;
+  text: string;
+  isActive: boolean;
+}
+export interface FormActiveProps {
+  interests: interest[] | undefined;
+}

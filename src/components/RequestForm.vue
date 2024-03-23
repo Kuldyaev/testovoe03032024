@@ -1,6 +1,11 @@
 <template>
   <section class="formPlace">
-    <FormActive v-if="RequestStage === 0" @close="sendRequest" />
+    <FormActive
+      v-if="RequestStage === 0"
+      @close="sendRequest"
+      @choseInterest="choseInterest"
+      :interests="interests"
+    />
     <Loader v-if="RequestStage === 1" />
     <RequestSuccess
       v-if="RequestStage === 2"
@@ -17,8 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { RequestFormProps } from "@/shared/types";
+import { ref, reactive } from "vue";
+import { RequestFormProps, interest } from "@/shared/types";
 import Loader from "./Loader.vue";
 import RequestSuccess from "./RequestSuccess.vue";
 import RequestError from "./RequestError.vue";
@@ -32,6 +37,51 @@ function sendRequest() {
   setTimeout(() => {
     RequestStage.value = 3;
   }, 4000);
+}
+
+const interests = ref<interest[]>([
+  {
+    id: 0,
+    text: "Сайт",
+    isActive: true,
+  },
+  {
+    id: 1,
+    text: "Веб-сервис",
+    isActive: false,
+  },
+  {
+    id: 2,
+    text: "Маркетинг",
+    isActive: false,
+  },
+  {
+    id: 3,
+    text: "Приложение",
+    isActive: false,
+  },
+  {
+    id: 4,
+    text: "Брендинг",
+    isActive: false,
+  },
+  {
+    id: 5,
+    text: "Что-то ещё",
+    isActive: false,
+  },
+]);
+
+function choseInterest(id: number) {
+  // if (interests.find((int) => int.id === id) !== undefined) {
+  const clon = interests.value;
+  // console.log(interests.filter((int) => int.id === id)[0]);
+
+  clon.filter((int) => int.id === id)[0].isActive = !interests.value.filter(
+    (int) => int.id === id
+  )[0].isActive;
+  interests.value = clon;
+  // }
 }
 </script>
 

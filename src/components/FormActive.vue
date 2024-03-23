@@ -1,34 +1,17 @@
 <template>
-  <FlexBox class="info" direction="column">
+  <FlexBox class="info" direction="column" justify="start" align="start">
     <FlexBox direction="column" justify="start">
       <FlexBox justify="start" w="100%">
         <h4>Что Вас интересует?</h4>
       </FlexBox>
-      <FlexBox>
+      <FlexBox class="interestDesk" w="100%" justify="start" gap=" ">
         <Button
-          category="circleRight"
-          @click="console.log('nsdlknfl')"
-          @stopmoving="console.log('nsdlknfl')"
-        />
-        <Button
-          category="circleRight"
-          @click="console.log('nsdlknfl')"
-          @stopmoving="console.log('nsdlknfl')"
-        />
-        <Button
-          category="circleRight"
-          @click="console.log('nsdlknfl')"
-          @stopmoving="console.log('nsdlknfl')"
-        />
-        <Button
-          category="circleRight"
-          @click="console.log('nsdlknfl')"
-          @stopmoving="console.log('nsdlknfl')"
-        />
-        <Button
-          category="circleRight"
-          @click="console.log('nsdlknfl')"
-          @stopmoving="console.log('nsdlknfl')"
+          v-for="interest in interests"
+          :key="interest.id"
+          category="primary"
+          :text="interest.text"
+          :class="interest.isActive ? 'active' : ''"
+          @click="$emit('choseInterest', interest.id)"
         />
       </FlexBox>
     </FlexBox>
@@ -41,7 +24,6 @@
         <input type="submit" value="Submit" />
       </form>
     </FlexBox>
-    tHIS IS ACTIVE FORM
 
     <FlexBox justify="start" w="100%" class="submitBtnPlace">
       <Button
@@ -62,8 +44,10 @@
 <script setup lang="ts">
 import FlexBox from "./FlexBox.vue";
 import Button from "./uikit/Button.vue";
+import { FormActiveProps } from "@/shared/types";
 
-const emits = defineEmits(["close"]);
+const emits = defineEmits(["close", "choseInterest"]);
+const props = defineProps<FormActiveProps>();
 </script>
 
 <style scoped lang="scss">
@@ -103,6 +87,12 @@ a {
   margin-top: 2.91665vw;
   margin-bottom: 1.9271vw;
 }
+.interestDesk {
+  margin-top: 1.25vw;
+  margin-bottom: 5vw;
+  flex-wrap: wrap;
+  gap: 0.6771vw;
+}
 
 @media (max-width: $small-screen) {
   .info {
@@ -120,6 +110,11 @@ a {
   .submitBtnPlace {
     margin-top: 5.8333vw;
     margin-bottom: 3.8542vw;
+  }
+  .interestDesk {
+    margin-top: 2.5vw;
+    margin-bottom: 10vw;
+    gap: 1.3542vw;
   }
 }
 </style>
