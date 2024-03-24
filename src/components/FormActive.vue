@@ -15,13 +15,14 @@
         />
       </FlexBox>
     </FlexBox>
-    <FlexBox>
+    <FlexBox w="100%">
       <form action="/action_page.php">
-        First name:<br />
-        <input type="text" value="Mickey" /><br />
-        Last name:<br />
-        <input type="text" name="lastname" value="Mouse" /><br /><br />
-        <input type="submit" value="Submit" />
+        <TextInput label="Имя" />
+        <FlexBox w="100%" direction="row" gap="20px" justify="between">
+          <TextInput label="Телефон" w="100%" m="0 5% 0 0" />
+          <TextInput label="Почта" w="100%" />
+        </FlexBox>
+        <TextInput label="Опишите задачу" />
       </form>
     </FlexBox>
 
@@ -44,6 +45,7 @@
 <script setup lang="ts">
 import FlexBox from "./FlexBox.vue";
 import Button from "./uikit/Button.vue";
+import TextInput from "./uikit/TextInput.vue";
 import { FormActiveProps } from "@/shared/types";
 
 const emits = defineEmits(["close", "choseInterest"]);
@@ -51,6 +53,9 @@ const props = defineProps<FormActiveProps>();
 </script>
 
 <style scoped lang="scss">
+form {
+  width: 100%;
+}
 h4,
 h5 {
   margin: 0;

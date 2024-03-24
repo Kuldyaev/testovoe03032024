@@ -56,3 +56,8 @@ export interface interest {
 export interface FormActiveProps {
   interests: interest[] | undefined;
 }
+
+export interface TextInputProps {
+  label: string;
+  w: string;
+}
