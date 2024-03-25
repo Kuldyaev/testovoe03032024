@@ -15,14 +15,19 @@
         />
       </FlexBox>
     </FlexBox>
-    <FlexBox>
+    <FlexBox w="100%">
       <form action="/action_page.php">
-        First name:<br />
-        <input type="text" value="Mickey" /><br />
-        Last name:<br />
-        <input type="text" name="lastname" value="Mouse" /><br /><br />
-        <input type="submit" value="Submit" />
+        <TextInput label="Имя" />
+        <FlexBox w="100%" direction="row" gap="20px" justify="between">
+          <TextInput label="Телефон" w="100%" m="0 5% 0 0" />
+          <TextInput label="Почта" w="100%" />
+        </FlexBox>
+        <TextInput label="Опишите задачу" />
       </form>
+    </FlexBox>
+    <FlexBox w="100%" justify="start" direction="column" class="budgetPlace">
+      <h4 class="budgetTitle">Бюджет (₽):</h4>
+      <BudgetInput value="0" />
     </FlexBox>
 
     <FlexBox justify="start" w="100%" class="submitBtnPlace">
@@ -44,6 +49,8 @@
 <script setup lang="ts">
 import FlexBox from "./FlexBox.vue";
 import Button from "./uikit/Button.vue";
+import TextInput from "./uikit/TextInput.vue";
+import BudgetInput from "./uikit/BudgetInput.vue";
 import { FormActiveProps } from "@/shared/types";
 
 const emits = defineEmits(["close", "choseInterest"]);
@@ -51,12 +58,17 @@ const props = defineProps<FormActiveProps>();
 </script>
 
 <style scoped lang="scss">
+form {
+  width: 100%;
+}
+h3,
 h4,
 h5 {
   margin: 0;
   padding: 0;
 }
-h4 {
+h4,
+h3 {
   color: $additional-grey;
   font-weight: 400;
   font-size: 1.146vw;
@@ -92,6 +104,12 @@ a {
   margin-bottom: 5vw;
   flex-wrap: wrap;
   gap: 0.6771vw;
+}
+.budgetTitle {
+  width: 100%;
+}
+.budgetPlace {
+  margin-top: 20px;
 }
 
 @media (max-width: $small-screen) {

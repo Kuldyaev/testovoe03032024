@@ -73,15 +73,11 @@ const interests = ref<interest[]>([
 ]);
 
 function choseInterest(id: number) {
-  // if (interests.find((int) => int.id === id) !== undefined) {
   const clon = interests.value;
-  // console.log(interests.filter((int) => int.id === id)[0]);
-
   clon.filter((int) => int.id === id)[0].isActive = !interests.value.filter(
     (int) => int.id === id
   )[0].isActive;
   interests.value = clon;
-  // }
 }
 </script>
 
