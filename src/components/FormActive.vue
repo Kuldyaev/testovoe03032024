@@ -27,7 +27,7 @@
     </FlexBox>
     <FlexBox w="100%" justify="start" direction="column" class="budgetPlace">
       <h4 class="budgetTitle">Бюджет (₽):</h4>
-      <BudgetInput value="0" />
+      <BudgetInput value="3" />
     </FlexBox>
 
     <FlexBox justify="start" w="100%" class="submitBtnPlace">
