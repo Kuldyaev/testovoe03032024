@@ -25,6 +25,10 @@
         <TextInput label="Опишите задачу" />
       </form>
     </FlexBox>
+    <FlexBox w="100%" justify="start" direction="column" class="budgetPlace">
+      <h4 class="budgetTitle">Бюджет (₽):</h4>
+      <BudgetInput value="0" />
+    </FlexBox>
 
     <FlexBox justify="start" w="100%" class="submitBtnPlace">
       <Button
@@ -46,6 +50,7 @@
 import FlexBox from "./FlexBox.vue";
 import Button from "./uikit/Button.vue";
 import TextInput from "./uikit/TextInput.vue";
+import BudgetInput from "./uikit/BudgetInput.vue";
 import { FormActiveProps } from "@/shared/types";
 
 const emits = defineEmits(["close", "choseInterest"]);
@@ -56,12 +61,14 @@ const props = defineProps<FormActiveProps>();
 form {
   width: 100%;
 }
+h3,
 h4,
 h5 {
   margin: 0;
   padding: 0;
 }
-h4 {
+h4,
+h3 {
   color: $additional-grey;
   font-weight: 400;
   font-size: 1.146vw;
@@ -97,6 +104,12 @@ a {
   margin-bottom: 5vw;
   flex-wrap: wrap;
   gap: 0.6771vw;
+}
+.budgetTitle {
+  width: 100%;
+}
+.budgetPlace {
+  margin-top: 20px;
 }
 
 @media (max-width: $small-screen) {

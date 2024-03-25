@@ -61,3 +61,6 @@ export interface TextInputProps {
   label: string;
   w: string;
 }
+export interface BudgetInputProps {
+  value: number | string;
+}
