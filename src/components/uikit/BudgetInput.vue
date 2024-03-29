@@ -1,14 +1,30 @@
 <template>
   <FlexBox direction="row" w="100%" justify="start">
-    <button :class="'left ' + String(props.value === '1' ? 'active' : '')">
+    <button
+      :class="'left ' + String(props.value === 1 ? 'active activeLeft' : '')"
+      @click="$emit('choseBudget', 1)"
+    >
       до 500к
     </button>
-    <div class="vertical"></div>
-    <button :class="'center ' + String(props.value === '2' ? 'active' : '')">
+    <!-- <div class="vertical"></div> -->
+    <button
+      :class="
+        'center ' + String(props.value === 2 ? 'active activeCenter' : '')
+      "
+      @click="$emit('choseBudget', 2)"
+    >
       до 1 млн
     </button>
-    <div class="vertical"></div>
-    <button :class="'right ' + String(props.value === '3' ? 'active' : '')">
+    <!-- <div
+      :class="
+        'vertical ' +
+        String(props.value === 2 || props.value === 3 ? 'activeVL' : '')
+      "
+    ></div> -->
+    <button
+      :class="'right ' + String(props.value === 3 ? 'active activeRight' : '')"
+      @click="$emit('choseBudget', 3)"
+    >
       >1 млн
     </button>
   </FlexBox>
@@ -17,9 +33,8 @@
 <script setup lang="ts">
 import FlexBox from "./../FlexBox.vue";
 import { BudgetInputProps } from "@/shared/types";
-
+const emits = defineEmits(["choseBudget"]);
 const props = defineProps<BudgetInputProps>();
-console.log(props);
 </script>
 
 <style scoped lang="scss">
@@ -63,5 +78,23 @@ button:active {
 .active:active {
   background-color: $primary-blue;
   color: $white;
+  border-top: 2px solid $primary-blue;
+  border-bottom: 2px solid $primary-blue;
+}
+.activeRight,
+.activeRight:hover,
+.activeRight:active {
+  border-right: 2px solid $primary-blue;
+}
+.activeLeft,
+.activeLeft:hover,
+.activeLeft:active {
+  border-left: 2px solid $primary-blue;
+}
+.activeCenter,
+.activeCenter:hover,
+.activeCenter:active {
+  border-left: 2px solid $primary-blue;
+  border-right: 2px solid $primary-blue;
 }
 </style>
