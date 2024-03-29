@@ -22,3 +22,9 @@ $small-screen: 768px;
 $big-mobile: 544px;
 $mobile: 360px;
 $under-mobile: calc($mobile - 1px);
+
+$s2px: 2px;
+
+@media (max-width: $small-screen) {
+  $s2px: 0.208vw;
+}

@@ -113,6 +113,7 @@ a {
 }
 .budgetTitle {
   width: 100%;
+  margin-bottom: 1.25vw;
 }
 .budgetPlace {
   margin-top: 20px;
@@ -139,6 +140,9 @@ a {
     margin-top: 2.5vw;
     margin-bottom: 10vw;
     gap: 1.3542vw;
+  }
+  .budgetTitle {
+    margin-bottom: 2.5vw;
   }
 }
 </style>

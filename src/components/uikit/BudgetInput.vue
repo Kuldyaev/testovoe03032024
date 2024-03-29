@@ -44,23 +44,24 @@ button {
   width: 33%;
   border: none;
   background: none;
-  height: 56px;
-  border-top: 2px solid $form-grey;
-  border-bottom: 2px solid $form-grey;
+  height: 2.9167vw;
+  border-top: $s2px solid $form-grey;
+  border-bottom: $s2px solid $form-grey;
+  font-size: 1.042vw;
+  line-height: 1.5625vw;
 }
 .center {
-  border-left: 2px solid $form-grey;
-  border-right: 2px solid $form-grey;
+  border-left: $s2px solid $form-grey;
+  border-right: $s2px solid $form-grey;
 }
 .left {
-  border-left: 2px solid $form-grey;
-  border-radius: 16px 0 0 16px;
+  border-left: $s2px solid $form-grey;
+  border-radius: 0.8333vw 0 0 0.8333vw;
 }
 .right {
-  border-right: 2px solid $form-grey;
-  border-radius: 0 16px 16px 0;
+  border-right: $s2px solid $form-grey;
+  border-radius: 0 0.8333vw 0.8333vw 0;
 }
-
 button:hover {
   background-color: $additional-darkgrey;
 }
@@ -73,30 +74,44 @@ button:active {
 .active:active {
   background-color: $primary-blue;
   color: $white;
-  border-top: 2px solid $primary-blue;
-  border-bottom: 2px solid $primary-blue;
+  border-top: $s2px solid $primary-blue;
+  border-bottom: $s2px solid $primary-blue;
 }
 .activeRight,
 .activeRight:hover,
 .activeRight:active,
 .activeForRight {
-  border-right: 2px solid $primary-blue;
+  border-right: $s2px solid $primary-blue;
 }
 .activeLeft,
 .activeLeft:hover,
 .activeLeft:active {
-  border-left: 2px solid $primary-blue;
+  border-left: $s2px solid $primary-blue;
 }
 .activeCenter,
 .activeCenter:hover,
 .activeCenter:active {
-  border-left: 2px solid $primary-blue;
-  border-right: 2px solid $primary-blue;
+  border-left: $s2px solid $primary-blue;
+  border-right: $s2px solid $primary-blue;
 }
 .activeForLeft {
   border-left: none;
 }
 .activeForRight {
   border-right: none;
+}
+
+@media (max-width: $small-screen) {
+  button {
+    height: 5.8333vw;
+    font-size: 2.083vw;
+    line-height: 3.125vw;
+  }
+  .left {
+    border-radius: 1.667vw 0 0 1.667vw;
+  }
+  .right {
+    border-radius: 0 1.667vw 1.667vw 0;
+  }
 }
 </style>
