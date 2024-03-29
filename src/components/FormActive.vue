@@ -27,7 +27,7 @@
     </FlexBox>
     <FlexBox w="100%" justify="start" direction="column" class="budgetPlace">
       <h4 class="budgetTitle">Бюджет (₽):</h4>
-      <BudgetInput value="3" />
+      <BudgetInput :value="budget" @choseBudget="choseBudget" />
     </FlexBox>
 
     <FlexBox justify="start" w="100%" class="submitBtnPlace">
@@ -47,6 +47,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import FlexBox from "./FlexBox.vue";
 import Button from "./uikit/Button.vue";
 import TextInput from "./uikit/TextInput.vue";
@@ -55,6 +56,11 @@ import { FormActiveProps } from "@/shared/types";
 
 const emits = defineEmits(["close", "choseInterest"]);
 const props = defineProps<FormActiveProps>();
+const budget = ref<number>(0);
+
+function choseBudget(id: string) {
+  budget.value = parseInt(id);
+}
 </script>
 
 <style scoped lang="scss">
@@ -107,6 +113,7 @@ a {
 }
 .budgetTitle {
   width: 100%;
+  margin-bottom: 1.25vw;
 }
 .budgetPlace {
   margin-top: 20px;
@@ -133,6 +140,9 @@ a {
     margin-top: 2.5vw;
     margin-bottom: 10vw;
     gap: 1.3542vw;
+  }
+  .budgetTitle {
+    margin-bottom: 2.5vw;
   }
 }
 </style>
