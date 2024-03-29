@@ -6,21 +6,17 @@
     >
       до 500к
     </button>
-    <!-- <div class="vertical"></div> -->
     <button
       :class="
-        'center ' + String(props.value === 2 ? 'active activeCenter' : '')
+        'center' +
+        String(props.value === 1 ? ' activeForLeft' : '') +
+        String(props.value === 2 ? ' active activeCenter' : '') +
+        String(props.value === 3 ? ' activeForRight' : '')
       "
       @click="$emit('choseBudget', 2)"
     >
       до 1 млн
     </button>
-    <!-- <div
-      :class="
-        'vertical ' +
-        String(props.value === 2 || props.value === 3 ? 'activeVL' : '')
-      "
-    ></div> -->
     <button
       :class="'right ' + String(props.value === 3 ? 'active activeRight' : '')"
       @click="$emit('choseBudget', 3)"
@@ -52,10 +48,9 @@ button {
   border-top: 2px solid $form-grey;
   border-bottom: 2px solid $form-grey;
 }
-.vertical {
-  width: 0px;
-  border: 1px solid $form-grey;
-  height: 56px;
+.center {
+  border-left: 2px solid $form-grey;
+  border-right: 2px solid $form-grey;
 }
 .left {
   border-left: 2px solid $form-grey;
@@ -83,7 +78,8 @@ button:active {
 }
 .activeRight,
 .activeRight:hover,
-.activeRight:active {
+.activeRight:active,
+.activeForRight {
   border-right: 2px solid $primary-blue;
 }
 .activeLeft,
@@ -96,5 +92,11 @@ button:active {
 .activeCenter:active {
   border-left: 2px solid $primary-blue;
   border-right: 2px solid $primary-blue;
+}
+.activeForLeft {
+  border-left: none;
+}
+.activeForRight {
+  border-right: none;
 }
 </style>
