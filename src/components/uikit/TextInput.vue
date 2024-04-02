@@ -1,7 +1,7 @@
 <template>
   <FlexBox direction="column" w="100%" justify="start">
     <label>{{ label }}</label>
-    <input type="text" />
+    <input type="text" v-model="model" />
   </FlexBox>
 </template>
 
@@ -14,6 +14,8 @@ const props = withDefaults(defineProps<TextInputProps>(), {
   label: "label",
   w: "100%",
 });
+
+const model = defineModel({ required: true });
 </script>
 
 <style scoped lang="scss">
