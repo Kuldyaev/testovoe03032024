@@ -46,21 +46,30 @@ const errorText = ref<string | null>(null);
 
 const validationInput = () => {
   //console.log(model.value);
-  if (props.label === "Почта" && String(model.value).length > 6) {
-    const EMAIL_REGEXP =
-      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-    if (!EMAIL_REGEXP.test(String(model.value))) {
-      errorText.value = "некорректный e-mail";
+  if (props.label === "Почта") {
+    if (String(model.value).length > 6) {
+      const EMAIL_REGEXP =
+        /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+      if (!EMAIL_REGEXP.test(String(model.value))) {
+        errorText.value = "некорректный e-mail";
+      } else {
+        errorText.value = null;
+      }
     } else {
       errorText.value = null;
     }
-  } else if (
-    props.label === "Почта" &&
-    String(model.value).length < 7 &&
-    errorText.value
-  ) {
-    errorText.value = null;
+  } else if (props.label === "Имя") {
+    const EMAIL_REGEXP = /^[a-zа-яё\s]+$/iu;
+    if (!EMAIL_REGEXP.test(String(model.value))) {
+      errorText.value = "только киррилица или латинские буквы";
+    } else {
+      errorText.value = null;
+    }
   }
+
+  // props.label === "Почта" &&
+  // String(model.value).length < 7 &&
+  // errorText.value
 };
 
 // watch(errorText, () => {
