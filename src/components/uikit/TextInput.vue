@@ -8,9 +8,9 @@
   >
     <label :class="classLabel">{{ label }}</label>
     <input
-      type="text"
+      :type="inputType"
       :class="classInput"
-      v-model="model"
+      v-model.trim="model"
       @focusout="focused = false"
       @focusin="focused = true"
       @mouseover="hovered = true"
@@ -30,17 +30,33 @@ import { TextInputProps } from "@/shared/types";
 const props = withDefaults(defineProps<TextInputProps>(), {
   label: "label",
   w: "100%",
-  errorText: null,
+  type: "text",
 });
 const classInput = ref<string>("");
 const classLabel = ref<string>("");
 const model = defineModel({ required: true });
 const focused = ref<boolean>(false);
 const hovered = ref<boolean>(false);
+const filled = ref<boolean>(false);
+const inputType = ref<string>("text");
+const errorText = ref<string | null>(null);
 
-watch(focused, () => {
-  classInput.value = focused.value ? "focused" : "";
-  classLabel.value = focused.value ? "focusedLabel" : "";
+watch(model, () => {
+  if (filled.value === false && model.value && String(model.value).length > 0) {
+    filled.value = true;
+  } else if (filled.value === true && String(model.value).length < 1) {
+    filled.value = false;
+  }
+});
+
+watch([focused, filled], () => {
+  if (focused.value) {
+    classInput.value = "focused";
+    classLabel.value = "focusedLabel";
+  } else {
+    classInput.value = filled.value ? "filled" : "";
+    classLabel.value = filled.value ? "filledLabel" : "";
+  }
 });
 // watch(hovered, () => {
 //   classInput.value = hovered.value ? "hovered" : "";
@@ -83,11 +99,17 @@ input:focus {
 .errorPlace {
   height: 1.3021vw;
 }
-.focusedLabel {
+.focusedLabel,
+.filledLabel {
   font-size: 0.7292vw;
   line-height: 1.1667vw;
-  color: $primary-blue;
   top: 0;
+}
+.focusedLabel {
+  color: $primary-blue;
+}
+.filledLabel {
+  color: $additional-grey;
 }
 
 @media (max-width: $small-screen) {
@@ -104,10 +126,11 @@ input:focus {
     color: $additional-grey;
     top: 3.6667vw;
   }
-  .focusedLabel {
+  .focusedLabel,
+  .filledLabel {
     font-size: 1.4583vw;
     line-height: 2.3333vw;
-    color: $primary-blue;
+
     top: 0;
   }
 }

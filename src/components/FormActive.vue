@@ -17,17 +17,18 @@
     </FlexBox>
     <FlexBox w="100%">
       <form action="/action_page.php">
-        <TextInput label="Имя" v-model.trim="name" />
+        <TextInput label="Имя" v-model="name" type="text" />
         <FlexBox w="100%" direction="row" gap="20px" justify="between">
           <TextInput
             label="Телефон"
+            type="text"
             w="100%"
             m="0 5% 0 0"
             v-model.trim="phone"
           />
-          <TextInput label="Почта" w="100%" v-model.trim="post" />
+          <TextInput label="Почта" w="100%" v-model="post" type="email" />
         </FlexBox>
-        <TextInput label="Опишите задачу" v-model.trim="task" />
+        <TextInput label="Опишите задачу" v-model="task" type="text" />
       </form>
     </FlexBox>
     <FlexBox w="100%" justify="start" direction="column" class="budgetPlace">
