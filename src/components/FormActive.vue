@@ -25,8 +25,15 @@
             w="100%"
             m="0 5% 0 0"
             v-model.trim="phone"
+            maxLength="10"
           />
-          <TextInput label="Почта" w="100%" v-model="post" type="email" />
+          <TextInput
+            label="Почта"
+            w="100%"
+            v-model="post"
+            type="email"
+            maxLength="50"
+          />
         </FlexBox>
         <TextInput label="Опишите задачу" v-model="task" type="text" />
       </form>

@@ -8,8 +8,9 @@
   >
     <label :class="classLabel">{{ label }}</label>
     <input
-      :type="inputType"
+      :type="props.type"
       :class="classInput"
+      :maxlength="props.maxLength"
       v-model.trim="model"
       @focusout="focused = false"
       @focusin="focused = true"
@@ -31,6 +32,7 @@ const props = withDefaults(defineProps<TextInputProps>(), {
   label: "label",
   w: "100%",
   type: "text",
+  maxLength: 40,
 });
 const classInput = ref<string>("");
 const classLabel = ref<string>("");
@@ -38,14 +40,28 @@ const model = defineModel({ required: true });
 const focused = ref<boolean>(false);
 const hovered = ref<boolean>(false);
 const filled = ref<boolean>(false);
-const inputType = ref<string>("text");
+//const inputType = ref<string>("text");
+//const maxLength = ref<number>(50);
 const errorText = ref<string | null>(null);
+
+const validationInput = () => {
+  console.log(model.value);
+};
+
+// watch(props, () => {
+//   if (props.label === "Почта" && maxLength.value !== 100) {
+//     maxLength.value = 100;
+//   } else console.log("OK");
+// });
 
 watch(model, () => {
   if (filled.value === false && model.value && String(model.value).length > 0) {
     filled.value = true;
   } else if (filled.value === true && String(model.value).length < 1) {
     filled.value = false;
+  }
+  if (model.value && String(model.value).length > 0) {
+    validationInput();
   }
 });
 
@@ -100,7 +116,8 @@ input:focus {
   height: 1.3021vw;
 }
 .focusedLabel,
-.filledLabel {
+.filledLabel,
+.errorPlace {
   font-size: 0.7292vw;
   line-height: 1.1667vw;
   top: 0;
@@ -110,6 +127,9 @@ input:focus {
 }
 .filledLabel {
   color: $additional-grey;
+}
+.errorPlace {
+  color: $error-red;
 }
 
 @media (max-width: $small-screen) {
@@ -127,10 +147,10 @@ input:focus {
     top: 3.6667vw;
   }
   .focusedLabel,
-  .filledLabel {
+  .filledLabel,
+  .errorPlace {
     font-size: 1.4583vw;
     line-height: 2.3333vw;
-
     top: 0;
   }
 }
