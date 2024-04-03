@@ -60,6 +60,7 @@ export interface FormActiveProps {
 export interface TextInputProps {
   label: string;
   w: string;
+  errorText: string | null;
 }
 export interface BudgetInputProps {
   value: number | string;
