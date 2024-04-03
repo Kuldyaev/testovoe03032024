@@ -45,13 +45,30 @@ const filled = ref<boolean>(false);
 const errorText = ref<string | null>(null);
 
 const validationInput = () => {
-  console.log(model.value);
+  //console.log(model.value);
+  if (props.label === "Почта" && String(model.value).length > 6) {
+    const EMAIL_REGEXP =
+      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+    if (!EMAIL_REGEXP.test(String(model.value))) {
+      errorText.value = "некорректный e-mail";
+    } else {
+      errorText.value = null;
+    }
+  } else if (
+    props.label === "Почта" &&
+    String(model.value).length < 7 &&
+    errorText.value
+  ) {
+    errorText.value = null;
+  }
 };
 
-// watch(props, () => {
-//   if (props.label === "Почта" && maxLength.value !== 100) {
-//     maxLength.value = 100;
-//   } else console.log("OK");
+// watch(errorText, () => {
+//   if (errorText) {
+//     classInput.value = "errorInInput";
+//   } else {
+//     classInput.value = "";
+//   }
 // });
 
 watch(model, () => {
@@ -59,19 +76,24 @@ watch(model, () => {
     filled.value = true;
   } else if (filled.value === true && String(model.value).length < 1) {
     filled.value = false;
+    errorText.value = null;
   }
   if (model.value && String(model.value).length > 0) {
     validationInput();
   }
 });
 
-watch([focused, filled], () => {
-  if (focused.value) {
-    classInput.value = "focused";
-    classLabel.value = "focusedLabel";
+watch([focused, filled, errorText], () => {
+  if (errorText.value !== null) {
+    classInput.value = "errorInInput";
   } else {
-    classInput.value = filled.value ? "filled" : "";
-    classLabel.value = filled.value ? "filledLabel" : "";
+    if (focused.value) {
+      classInput.value = "focused";
+      classLabel.value = "focusedLabel";
+    } else {
+      classInput.value = filled.value ? "filled" : "";
+      classLabel.value = filled.value ? "filledLabel" : "";
+    }
   }
 });
 // watch(hovered, () => {
@@ -107,6 +129,11 @@ input:hover {
 }
 input:focus {
   border-bottom: $s2px solid $primary-blue;
+}
+.errorInInput,
+.errorInInput:hover,
+.errorInInput:focus {
+  border-bottom: $s2px solid $error-red;
 }
 
 .textInput {

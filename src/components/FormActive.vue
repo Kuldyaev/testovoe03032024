@@ -17,7 +17,7 @@
     </FlexBox>
     <FlexBox w="100%">
       <form action="/action_page.php">
-        <TextInput label="Имя" v-model="name" type="text" />
+        <TextInput label="Имя" w="100%" v-model="name" type="text" />
         <FlexBox w="100%" direction="row" gap="20px" justify="between">
           <TextInput
             label="Телефон"
@@ -35,7 +35,7 @@
             maxLength="50"
           />
         </FlexBox>
-        <TextInput label="Опишите задачу" v-model="task" type="text" />
+        <TextInput label="Опишите задачу" w="100%" v-model="task" type="text" />
       </form>
     </FlexBox>
     <FlexBox w="100%" justify="start" direction="column" class="budgetPlace">
