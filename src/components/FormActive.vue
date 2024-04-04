@@ -17,12 +17,25 @@
     </FlexBox>
     <FlexBox w="100%">
       <form action="/action_page.php">
-        <TextInput label="Имя" />
+        <TextInput label="Имя" w="100%" v-model="name" type="text" />
         <FlexBox w="100%" direction="row" gap="20px" justify="between">
-          <TextInput label="Телефон" w="100%" m="0 5% 0 0" />
-          <TextInput label="Почта" w="100%" />
+          <TextInput
+            label="Телефон"
+            type="text"
+            w="100%"
+            m="0 5% 0 0"
+            v-model.trim="phone"
+            maxLength="10"
+          />
+          <TextInput
+            label="Почта"
+            w="100%"
+            v-model="post"
+            type="email"
+            maxLength="50"
+          />
         </FlexBox>
-        <TextInput label="Опишите задачу" />
+        <TextInput label="Опишите задачу" w="100%" v-model="task" type="text" />
       </form>
     </FlexBox>
     <FlexBox w="100%" justify="start" direction="column" class="budgetPlace">
@@ -57,6 +70,10 @@ import { FormActiveProps } from "@/shared/types";
 const emits = defineEmits(["close", "choseInterest"]);
 const props = defineProps<FormActiveProps>();
 const budget = ref<number>(0);
+const name = ref<string | null>(null);
+const phone = ref<string | null>(null);
+const post = ref<string | null>(null);
+const task = ref<string | null>(null);
 
 function choseBudget(id: string) {
   budget.value = parseInt(id);
