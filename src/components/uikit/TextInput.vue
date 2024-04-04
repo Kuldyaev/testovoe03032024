@@ -8,6 +8,19 @@
   >
     <label :class="classLabel">{{ label }}</label>
     <input
+      v-if="props.label === 'Телефон'"
+      :type="props.type"
+      :class="classInput"
+      :maxlength="props.maxLength"
+      v-model.trim="model"
+      @focusout="focused = false"
+      @focusin="focused = true"
+      @mouseover="hovered = true"
+      @mouseleave="hovered = false"
+      @input="telefonNumberMask"
+    />
+    <input
+      v-else
       :type="props.type"
       :class="classInput"
       :maxlength="props.maxLength"
@@ -70,6 +83,19 @@ const validationInput = () => {
   // props.label === "Почта" &&
   // String(model.value).length < 7 &&
   // errorText.value
+};
+
+const telefonNumberMask = () => {
+  const lastSymbol = parseInt(String(model.value).slice(-1));
+  const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  if (String(model.value).length < 0) {
+    return;
+  }
+  if (!isNaN(lastSymbol) && numbers.includes(lastSymbol)) {
+    console.log(model.value);
+  } else {
+    model.value = String(model.value).slice(0, -1);
+  }
 };
 
 // watch(errorText, () => {
