@@ -83,7 +83,6 @@ const validationInput = () => {
 const masked = (tel: number, mask: string) => {
   const result = ["", "", mask];
   if (tel < 1) return "";
-
   for (var i = 0; i < String(tel).length; i++) {
     if (i === 0) {
       result[0] =
@@ -111,87 +110,40 @@ const telefonNumberMask = () => {
       !isNaN(parseInt(lastSymbol)) &&
       numbers.includes(parseInt(lastSymbol))
     ) {
-      console.log("number");
-
-      currTelefon.value += lastSymbol;
-
-      console.log(masked(parseInt(currTelefon.value), maska));
+      if (String(currTelefon.value).length < 1) {
+        currTelefon.value += lastSymbol;
+        model.value = masked(parseInt(lastSymbol), maska);
+      } else if (
+        masked(parseInt(currTelefon.value), maska).length <
+        String(model.value).length
+      ) {
+        currTelefon.value += lastSymbol;
+        model.value = masked(parseInt(currTelefon.value), maska);
+      } else if (
+        masked(parseInt(currTelefon.value), maska).length >
+        String(model.value).length
+      ) {
+        currTelefon.value = currTelefon.value.slice(0, -1);
+        model.value = masked(parseInt(currTelefon.value), maska);
+      }
     } else {
-      console.log("not number");
-      model.value = strModelValue.slice(0, -1);
+      if (
+        masked(parseInt(currTelefon.value), maska).length >
+        String(model.value).length
+      ) {
+        if (currTelefon.value.length === 1) {
+          currTelefon.value = "";
+          model.value = "";
+        } else {
+          currTelefon.value = currTelefon.value.slice(0, -1);
+          model.value = masked(parseInt(currTelefon.value), maska);
+        }
+      } else {
+        model.value = strModelValue.slice(0, -1);
+      }
     }
   }
 };
-
-// if (!isNaN(lastSymbol) && numbers.includes(lastSymbol)) {
-//   if (inputTelNumber.value.length < strModelValue.length) {
-//     currTelefon.value = currTelefon.value + lastSymbol;
-//     switch (strModelValue.length) {
-//       case 1:
-//         inputTelNumber.value = "+7 (" + lastSymbol;
-//         model.value = inputTelNumber.value;
-//         break;
-//       case 6:
-//       case 10:
-//       case 11:
-//       case 14:
-//       case 17:
-//       case 18:
-//         inputTelNumber.value = inputTelNumber.value + lastSymbol;
-//         model.value = inputTelNumber.value;
-//         break;
-//       case 7:
-//         inputTelNumber.value = inputTelNumber.value + lastSymbol + ") ";
-//         model.value = inputTelNumber.value;
-//         break;
-//       case 12:
-//       case 15:
-//         inputTelNumber.value = inputTelNumber.value + lastSymbol + "-";
-//         model.value = inputTelNumber.value;
-//         break;
-//     }
-//   } else if (inputTelNumber.value.length > strModelValue.length) {
-//     switch (strModelValue.length) {
-//       case 5:
-//       case 6:
-//       case 10:
-//       case 11:
-//       case 12:
-//       case 17:
-//       case 14:
-//         inputTelNumber.value = inputTelNumber.value.slice(0, -1);
-//         currTelefon.value = currTelefon.value.slice(0, -1);
-//         model.value = inputTelNumber.value;
-//     }
-//   }
-// } else {
-//   switch (strModelValue.length) {
-//     case 4:
-//       currTelefon.value = "";
-//       inputTelNumber.value = "";
-//     case 9:
-//       currTelefon.value = currTelefon.value.slice(0, -1);
-//       inputTelNumber.value = inputTelNumber.value.slice(0, -3);
-//       break;
-//     case 13:
-//     case 16:
-//       currTelefon.value = currTelefon.value.slice(0, -1);
-//       inputTelNumber.value = inputTelNumber.value.slice(0, -2);
-//       break;
-//   }
-//   model.value = inputTelNumber.value;
-// }
-
-// console.log(strModelValue);
-// console.log(inputTelNumber.value);
-
-// watch(errorText, () => {
-//   if (errorText) {
-//     classInput.value = "errorInInput";
-//   } else {
-//     classInput.value = "";
-//   }
-// });
 
 watch(model, () => {
   if (filled.value === false && model.value && String(model.value).length > 0) {
@@ -218,9 +170,6 @@ watch([focused, filled, errorText], () => {
     }
   }
 });
-// watch(hovered, () => {
-//   classInput.value = hovered.value ? "hovered" : "";
-// });
 </script>
 
 <style scoped lang="scss">
