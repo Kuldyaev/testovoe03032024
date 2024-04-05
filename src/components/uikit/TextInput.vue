@@ -12,7 +12,7 @@
       :type="props.type"
       :class="classInput"
       :maxlength="props.maxLength"
-      v-model.trim="model"
+      v-model="model"
       @focusout="focused = false"
       @focusin="focused = true"
       @mouseover="hovered = true"
@@ -58,7 +58,6 @@ const currTelefon = ref<string>("");
 const errorText = ref<string | null>(null);
 
 const validationInput = () => {
-  //console.log(model.value);
   if (props.label === "Почта") {
     if (String(model.value).length > 6) {
       const EMAIL_REGEXP =
@@ -81,25 +80,110 @@ const validationInput = () => {
   }
 };
 
-const telefonNumberMask = () => {
-  const lastSymbol = parseInt(String(model.value).slice(-1));
-  const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  if (String(model.value).length < 0) {
-    return;
-  }
-  if (!isNaN(lastSymbol) && numbers.includes(lastSymbol)) {
-    if (currTelefon.value.length < String(model.value).length) {
-      inputTelNumber.value = inputTelNumber.value + lastSymbol;
-      currTelefon.value = inputTelNumber.value;
+const masked = (tel: number, mask: string) => {
+  const result = ["", "", mask];
+  if (tel < 1) return "";
+
+  for (var i = 0; i < String(tel).length; i++) {
+    if (i === 0) {
+      result[0] =
+        mask.slice(0, mask.indexOf("#")) + String(tel).slice(i, i + 1);
+      result[1] = mask.slice(mask.indexOf("#") + 1);
     } else {
-      inputTelNumber.value = inputTelNumber.value.slice(0, -1);
-      currTelefon.value = inputTelNumber.value;
+      result[0] +=
+        result[1].slice(0, result[1].indexOf("#")) +
+        String(tel).slice(i, i + 1);
+      result[1] = result[1].slice(result[1].indexOf("#") + 1);
     }
-    console.log(inputTelNumber.value);
+  }
+  return result[0];
+};
+
+const telefonNumberMask = () => {
+  const strModelValue = String(model.value);
+  const lastSymbol = strModelValue.slice(-1);
+  const maska = "+7 (###) ###-##-##";
+  const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  if (strModelValue.length < 0) {
+    return;
   } else {
-    model.value = String(model.value).slice(0, -1);
+    if (
+      !isNaN(parseInt(lastSymbol)) &&
+      numbers.includes(parseInt(lastSymbol))
+    ) {
+      console.log("number");
+
+      currTelefon.value += lastSymbol;
+
+      console.log(masked(parseInt(currTelefon.value), maska));
+    } else {
+      console.log("not number");
+      model.value = strModelValue.slice(0, -1);
+    }
   }
 };
+
+// if (!isNaN(lastSymbol) && numbers.includes(lastSymbol)) {
+//   if (inputTelNumber.value.length < strModelValue.length) {
+//     currTelefon.value = currTelefon.value + lastSymbol;
+//     switch (strModelValue.length) {
+//       case 1:
+//         inputTelNumber.value = "+7 (" + lastSymbol;
+//         model.value = inputTelNumber.value;
+//         break;
+//       case 6:
+//       case 10:
+//       case 11:
+//       case 14:
+//       case 17:
+//       case 18:
+//         inputTelNumber.value = inputTelNumber.value + lastSymbol;
+//         model.value = inputTelNumber.value;
+//         break;
+//       case 7:
+//         inputTelNumber.value = inputTelNumber.value + lastSymbol + ") ";
+//         model.value = inputTelNumber.value;
+//         break;
+//       case 12:
+//       case 15:
+//         inputTelNumber.value = inputTelNumber.value + lastSymbol + "-";
+//         model.value = inputTelNumber.value;
+//         break;
+//     }
+//   } else if (inputTelNumber.value.length > strModelValue.length) {
+//     switch (strModelValue.length) {
+//       case 5:
+//       case 6:
+//       case 10:
+//       case 11:
+//       case 12:
+//       case 17:
+//       case 14:
+//         inputTelNumber.value = inputTelNumber.value.slice(0, -1);
+//         currTelefon.value = currTelefon.value.slice(0, -1);
+//         model.value = inputTelNumber.value;
+//     }
+//   }
+// } else {
+//   switch (strModelValue.length) {
+//     case 4:
+//       currTelefon.value = "";
+//       inputTelNumber.value = "";
+//     case 9:
+//       currTelefon.value = currTelefon.value.slice(0, -1);
+//       inputTelNumber.value = inputTelNumber.value.slice(0, -3);
+//       break;
+//     case 13:
+//     case 16:
+//       currTelefon.value = currTelefon.value.slice(0, -1);
+//       inputTelNumber.value = inputTelNumber.value.slice(0, -2);
+//       break;
+//   }
+//   model.value = inputTelNumber.value;
+// }
+
+// console.log(strModelValue);
+// console.log(inputTelNumber.value);
 
 // watch(errorText, () => {
 //   if (errorText) {
