@@ -53,8 +53,8 @@ const model = defineModel({ required: true });
 const focused = ref<boolean>(false);
 const hovered = ref<boolean>(false);
 const filled = ref<boolean>(false);
-//const inputType = ref<string>("text");
-//const maxLength = ref<number>(50);
+const inputTelNumber = ref<string>("");
+const currTelefon = ref<string>("");
 const errorText = ref<string | null>(null);
 
 const validationInput = () => {
@@ -79,10 +79,6 @@ const validationInput = () => {
       errorText.value = null;
     }
   }
-
-  // props.label === "Почта" &&
-  // String(model.value).length < 7 &&
-  // errorText.value
 };
 
 const telefonNumberMask = () => {
@@ -92,7 +88,14 @@ const telefonNumberMask = () => {
     return;
   }
   if (!isNaN(lastSymbol) && numbers.includes(lastSymbol)) {
-    console.log(model.value);
+    if (currTelefon.value.length < String(model.value).length) {
+      inputTelNumber.value = inputTelNumber.value + lastSymbol;
+      currTelefon.value = inputTelNumber.value;
+    } else {
+      inputTelNumber.value = inputTelNumber.value.slice(0, -1);
+      currTelefon.value = inputTelNumber.value;
+    }
+    console.log(inputTelNumber.value);
   } else {
     model.value = String(model.value).slice(0, -1);
   }
