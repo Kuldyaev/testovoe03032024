@@ -60,7 +60,7 @@ export interface FormActiveProps {
 export interface TextInputProps {
   label: string;
   w: string;
-  type: "text" | "email";
+  type: "text" | "email" | "tel" | "number";
   maxLength?: number | string;
 }
 export interface BudgetInputProps {

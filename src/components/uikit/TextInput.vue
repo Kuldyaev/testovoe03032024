@@ -8,6 +8,19 @@
   >
     <label :class="classLabel">{{ label }}</label>
     <input
+      v-if="props.label === 'Телефон'"
+      :type="props.type"
+      :class="classInput"
+      :maxlength="props.maxLength"
+      v-model="model"
+      @focusout="focused = false"
+      @focusin="focused = true"
+      @mouseover="hovered = true"
+      @mouseleave="hovered = false"
+      @input="telefonNumberMask"
+    />
+    <input
+      v-else
       :type="props.type"
       :class="classInput"
       :maxlength="props.maxLength"
@@ -40,12 +53,11 @@ const model = defineModel({ required: true });
 const focused = ref<boolean>(false);
 const hovered = ref<boolean>(false);
 const filled = ref<boolean>(false);
-//const inputType = ref<string>("text");
-//const maxLength = ref<number>(50);
+const inputTelNumber = ref<string>("");
+const currTelefon = ref<string>("");
 const errorText = ref<string | null>(null);
 
 const validationInput = () => {
-  //console.log(model.value);
   if (props.label === "Почта") {
     if (String(model.value).length > 6) {
       const EMAIL_REGEXP =
@@ -66,19 +78,72 @@ const validationInput = () => {
       errorText.value = null;
     }
   }
-
-  // props.label === "Почта" &&
-  // String(model.value).length < 7 &&
-  // errorText.value
 };
 
-// watch(errorText, () => {
-//   if (errorText) {
-//     classInput.value = "errorInInput";
-//   } else {
-//     classInput.value = "";
-//   }
-// });
+const masked = (tel: number, mask: string) => {
+  const result = ["", "", mask];
+  if (tel < 1) return "";
+  for (var i = 0; i < String(tel).length; i++) {
+    if (i === 0) {
+      result[0] =
+        mask.slice(0, mask.indexOf("#")) + String(tel).slice(i, i + 1);
+      result[1] = mask.slice(mask.indexOf("#") + 1);
+    } else {
+      result[0] +=
+        result[1].slice(0, result[1].indexOf("#")) +
+        String(tel).slice(i, i + 1);
+      result[1] = result[1].slice(result[1].indexOf("#") + 1);
+    }
+  }
+  return result[0];
+};
+
+const telefonNumberMask = () => {
+  const strModelValue = String(model.value);
+  const lastSymbol = strModelValue.slice(-1);
+  const maska = "+7 (###) ###-##-##";
+  const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  if (strModelValue.length < 0) {
+    return;
+  } else {
+    if (
+      !isNaN(parseInt(lastSymbol)) &&
+      numbers.includes(parseInt(lastSymbol))
+    ) {
+      if (String(currTelefon.value).length < 1) {
+        currTelefon.value += lastSymbol;
+        model.value = masked(parseInt(lastSymbol), maska);
+      } else if (
+        masked(parseInt(currTelefon.value), maska).length <
+        String(model.value).length
+      ) {
+        currTelefon.value += lastSymbol;
+        model.value = masked(parseInt(currTelefon.value), maska);
+      } else if (
+        masked(parseInt(currTelefon.value), maska).length >
+        String(model.value).length
+      ) {
+        currTelefon.value = currTelefon.value.slice(0, -1);
+        model.value = masked(parseInt(currTelefon.value), maska);
+      }
+    } else {
+      if (
+        masked(parseInt(currTelefon.value), maska).length >
+        String(model.value).length
+      ) {
+        if (currTelefon.value.length === 1) {
+          currTelefon.value = "";
+          model.value = "";
+        } else {
+          currTelefon.value = currTelefon.value.slice(0, -1);
+          model.value = masked(parseInt(currTelefon.value), maska);
+        }
+      } else {
+        model.value = strModelValue.slice(0, -1);
+      }
+    }
+  }
+};
 
 watch(model, () => {
   if (filled.value === false && model.value && String(model.value).length > 0) {
@@ -105,9 +170,6 @@ watch([focused, filled, errorText], () => {
     }
   }
 });
-// watch(hovered, () => {
-//   classInput.value = hovered.value ? "hovered" : "";
-// });
 </script>
 
 <style scoped lang="scss">

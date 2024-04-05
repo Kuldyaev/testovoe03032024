@@ -21,11 +21,11 @@
         <FlexBox w="100%" direction="row" gap="20px" justify="between">
           <TextInput
             label="Телефон"
-            type="text"
+            type="tel"
             w="100%"
             m="0 5% 0 0"
-            v-model.trim="phone"
-            maxLength="10"
+            v-model="phone"
+            maxLength="18"
           />
           <TextInput
             label="Почта"
