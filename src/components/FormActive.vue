@@ -60,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import FlexBox from "./FlexBox.vue";
 import Button from "./uikit/Button.vue";
 import TextInput from "./uikit/TextInput.vue";
@@ -78,6 +78,13 @@ const task = ref<string | null>(null);
 function choseBudget(id: string) {
   budget.value = parseInt(id);
 }
+
+watch([name, phone, post, task], () => {
+  console.log("name : " + name.value);
+  console.log("phone : " + phone.value);
+  console.log("post : " + post.value);
+  console.log("task : " + task.value);
+});
 </script>
 
 <style scoped lang="scss">
