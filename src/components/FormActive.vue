@@ -17,7 +17,13 @@
     </FlexBox>
     <FlexBox w="100%">
       <form action="/action_page.php">
-        <TextInput label="Имя" w="100%" v-model="name" type="text" />
+        <TextInput
+          label="Имя"
+          w="100%"
+          v-model="name"
+          type="text"
+          :errorMessage="errorName"
+        />
         <FlexBox w="100%" direction="row" gap="20px" justify="between">
           <TextInput
             label="Телефон"
@@ -34,6 +40,7 @@
             v-model="post"
             type="email"
             maxLength="50"
+            :errorMessage="errorPost"
           />
         </FlexBox>
         <TextInput label="Опишите задачу" w="100%" v-model="task" type="text" />
@@ -76,6 +83,8 @@ const phone = ref<string | null | number>(null);
 const post = ref<string | null>(null);
 const task = ref<string | null>(null);
 const maska = "+7 (###) ###-##-##";
+const errorName = ref<string | null>(null);
+const errorPost = ref<string | null>(null);
 
 const choseBudget = (id: string) => {
   budget.value = parseInt(id);
@@ -85,7 +94,36 @@ const demasked = (tel: number | string | null) => {
   return String(tel).slice(1);
 };
 
+watch(post, () => {
+  if (!(post.value && String(post.value).length > 0)) return;
+  if (String(post.value).length > 6) {
+    const EMAIL_REGEXP =
+      /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+    if (!EMAIL_REGEXP.test(String(post.value))) {
+      errorPost.value = "некорректный e-mail";
+    } else {
+      errorPost.value = null;
+    }
+  } else {
+    errorPost.value = null;
+  }
+});
+
+watch(name, () => {
+  if (!(name.value && String(name.value).length > 0)) return;
+  const EMAIL_REGEXP = /^[a-zа-яё\s]+$/iu;
+  if (!EMAIL_REGEXP.test(String(name.value))) {
+    errorName.value = "только киррилица или латинские буквы";
+  } else {
+    errorName.value = null;
+  }
+});
+
 watch([name, phone, post, task], () => {
+  // if (model.value && String(model.value).length > 0) {
+  //   validationInput();
+  // }
+
   console.log("name : " + name.value);
   console.log("phone : " + phone.value);
   console.log("demasked : " + demasked(phone.value));

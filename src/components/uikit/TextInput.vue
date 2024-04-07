@@ -31,7 +31,7 @@
       @mouseleave="hovered = false"
     />
     <FlexBox w="100%" justify="start" class="errorPlace"
-      >{{ errorText ? errorText : "" }}
+      >{{ errorMessage ? errorMessage : "" }}
     </FlexBox>
   </FlexBox>
 </template>
@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<TextInputProps>(), {
   w: "100%",
   type: "text",
   maxLength: 40,
-  errorMessage: "",
+  errorMessage: null,
   maska: "",
 });
 const classInput = ref<string>("");
@@ -57,29 +57,6 @@ const hovered = ref<boolean>(false);
 const filled = ref<boolean>(false);
 const currTelefon = ref<string>("");
 const errorText = ref<string | null>(null);
-
-const validationInput = () => {
-  if (props.label === "Почта") {
-    if (String(model.value).length > 6) {
-      const EMAIL_REGEXP =
-        /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-      if (!EMAIL_REGEXP.test(String(model.value))) {
-        errorText.value = "некорректный e-mail";
-      } else {
-        errorText.value = null;
-      }
-    } else {
-      errorText.value = null;
-    }
-  } else if (props.label === "Имя") {
-    const EMAIL_REGEXP = /^[a-zа-яё\s]+$/iu;
-    if (!EMAIL_REGEXP.test(String(model.value))) {
-      errorText.value = "только киррилица или латинские буквы";
-    } else {
-      errorText.value = null;
-    }
-  }
-};
 
 const masked = (tel: number) => {
   const result = ["", ""];
@@ -149,9 +126,6 @@ watch(model, () => {
   } else if (filled.value === true && String(model.value).length < 1) {
     filled.value = false;
     errorText.value = null;
-  }
-  if (model.value && String(model.value).length > 0) {
-    validationInput();
   }
 });
 

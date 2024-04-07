@@ -62,7 +62,7 @@ export interface TextInputProps {
   w: string;
   type: "text" | "email" | "tel" | "number";
   maxLength?: number | string;
-  errorMessage?: string;
+  errorMessage?: string | null;
   maska?: string;
 }
 export interface BudgetInputProps {
