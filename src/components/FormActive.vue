@@ -26,6 +26,7 @@
             m="0 5% 0 0"
             v-model="phone"
             maxLength="18"
+            :maska="maska"
           />
           <TextInput
             label="Почта"
