@@ -71,17 +71,23 @@ const emits = defineEmits(["close", "choseInterest"]);
 const props = defineProps<FormActiveProps>();
 const budget = ref<number>(0);
 const name = ref<string | null>(null);
-const phone = ref<string | null>(null);
+const phone = ref<string | null | number>(null);
 const post = ref<string | null>(null);
 const task = ref<string | null>(null);
+const maska = "+7 (###) ###-##-##";
 
-function choseBudget(id: string) {
+const choseBudget = (id: string) => {
   budget.value = parseInt(id);
-}
+};
+
+const demasked = (tel: number | string | null) => {
+  return String(tel).slice(1);
+};
 
 watch([name, phone, post, task], () => {
   console.log("name : " + name.value);
   console.log("phone : " + phone.value);
+  console.log("demasked : " + demasked(phone.value));
   console.log("post : " + post.value);
   console.log("task : " + task.value);
 });
