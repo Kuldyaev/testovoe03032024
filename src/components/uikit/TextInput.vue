@@ -31,7 +31,7 @@
       @mouseleave="hovered = false"
     />
     <FlexBox w="100%" justify="start" class="errorPlace"
-      >{{ errorText ? errorText : "" }}
+      >{{ errorMessage ? errorMessage : "" }}
     </FlexBox>
   </FlexBox>
 </template>
@@ -46,6 +46,8 @@ const props = withDefaults(defineProps<TextInputProps>(), {
   w: "100%",
   type: "text",
   maxLength: 40,
+  errorMessage: null,
+  maska: "",
 });
 const classInput = ref<string>("");
 const classLabel = ref<string>("");
@@ -53,41 +55,18 @@ const model = defineModel({ required: true });
 const focused = ref<boolean>(false);
 const hovered = ref<boolean>(false);
 const filled = ref<boolean>(false);
-const inputTelNumber = ref<string>("");
 const currTelefon = ref<string>("");
 const errorText = ref<string | null>(null);
 
-const validationInput = () => {
-  if (props.label === "Почта") {
-    if (String(model.value).length > 6) {
-      const EMAIL_REGEXP =
-        /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-      if (!EMAIL_REGEXP.test(String(model.value))) {
-        errorText.value = "некорректный e-mail";
-      } else {
-        errorText.value = null;
-      }
-    } else {
-      errorText.value = null;
-    }
-  } else if (props.label === "Имя") {
-    const EMAIL_REGEXP = /^[a-zа-яё\s]+$/iu;
-    if (!EMAIL_REGEXP.test(String(model.value))) {
-      errorText.value = "только киррилица или латинские буквы";
-    } else {
-      errorText.value = null;
-    }
-  }
-};
-
-const masked = (tel: number, mask: string) => {
-  const result = ["", "", mask];
+const masked = (tel: number) => {
+  const result = ["", ""];
   if (tel < 1) return "";
   for (var i = 0; i < String(tel).length; i++) {
     if (i === 0) {
       result[0] =
-        mask.slice(0, mask.indexOf("#")) + String(tel).slice(i, i + 1);
-      result[1] = mask.slice(mask.indexOf("#") + 1);
+        props.maska.slice(0, props.maska.indexOf("#")) +
+        String(tel).slice(i, i + 1);
+      result[1] = props.maska.slice(props.maska.indexOf("#") + 1);
     } else {
       result[0] +=
         result[1].slice(0, result[1].indexOf("#")) +
@@ -101,7 +80,6 @@ const masked = (tel: number, mask: string) => {
 const telefonNumberMask = () => {
   const strModelValue = String(model.value);
   const lastSymbol = strModelValue.slice(-1);
-  const maska = "+7 (###) ###-##-##";
   const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   if (strModelValue.length < 0) {
     return;
@@ -112,31 +90,28 @@ const telefonNumberMask = () => {
     ) {
       if (String(currTelefon.value).length < 1) {
         currTelefon.value += lastSymbol;
-        model.value = masked(parseInt(lastSymbol), maska);
+        model.value = masked(parseInt(lastSymbol));
       } else if (
-        masked(parseInt(currTelefon.value), maska).length <
-        String(model.value).length
+        masked(parseInt(currTelefon.value)).length < String(model.value).length
       ) {
         currTelefon.value += lastSymbol;
-        model.value = masked(parseInt(currTelefon.value), maska);
+        model.value = masked(parseInt(currTelefon.value));
       } else if (
-        masked(parseInt(currTelefon.value), maska).length >
-        String(model.value).length
+        masked(parseInt(currTelefon.value)).length > String(model.value).length
       ) {
         currTelefon.value = currTelefon.value.slice(0, -1);
-        model.value = masked(parseInt(currTelefon.value), maska);
+        model.value = masked(parseInt(currTelefon.value));
       }
     } else {
       if (
-        masked(parseInt(currTelefon.value), maska).length >
-        String(model.value).length
+        masked(parseInt(currTelefon.value)).length > String(model.value).length
       ) {
         if (currTelefon.value.length === 1) {
           currTelefon.value = "";
           model.value = "";
         } else {
           currTelefon.value = currTelefon.value.slice(0, -1);
-          model.value = masked(parseInt(currTelefon.value), maska);
+          model.value = masked(parseInt(currTelefon.value));
         }
       } else {
         model.value = strModelValue.slice(0, -1);
@@ -151,9 +126,6 @@ watch(model, () => {
   } else if (filled.value === true && String(model.value).length < 1) {
     filled.value = false;
     errorText.value = null;
-  }
-  if (model.value && String(model.value).length > 0) {
-    validationInput();
   }
 });
 
