@@ -120,10 +120,6 @@ watch(name, () => {
 });
 
 watch([name, phone, post, task], () => {
-  // if (model.value && String(model.value).length > 0) {
-  //   validationInput();
-  // }
-
   console.log("name : " + name.value);
   console.log("phone : " + phone.value);
   console.log("demasked : " + demasked(phone.value));
