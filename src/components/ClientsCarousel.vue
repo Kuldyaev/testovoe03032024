@@ -43,14 +43,27 @@
         />
       </FlexBox>
     </div>
+    <swiper-container
+      slides-per-view="3"
+      speed="500"
+      loop="true"
+      css-mode="true"
+    >
+      <swiper-slide>Slide 1</swiper-slide>
+      <swiper-slide>Slide 2</swiper-slide>
+      <swiper-slide>Slide 3</swiper-slide>
+    </swiper-container>
   </FlexBox>
 </template>
 
 <script setup lang="ts">
 import { reactive, watch } from "vue";
+import { register } from "swiper/element/bundle";
 import FlexBox from "./FlexBox.vue";
 import Carousel from "./uikit/Carousel.vue";
 import Button from "./uikit/Button.vue";
+
+register();
 
 interface stateT {
   carouselSlides: number[];

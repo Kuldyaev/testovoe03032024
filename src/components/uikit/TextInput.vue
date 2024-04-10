@@ -6,32 +6,32 @@
     align="start"
     class="textInput"
   >
-    <label :class="classLabel">{{ label }}</label>
-    <input
-      v-if="props.label === 'Телефон'"
-      :type="props.type"
-      :class="classInput"
-      :maxlength="props.maxLength"
-      v-model="model"
-      @focusout="focused = false"
-      @focusin="focused = true"
+    <div
+      :class="'inputPlace ' + classInput"
       @mouseover="hovered = true"
       @mouseleave="hovered = false"
-      @input="telefonNumberMask"
-    />
-    <input
-      v-else
-      :type="props.type"
-      :class="classInput"
-      :maxlength="props.maxLength"
-      v-model.trim="model"
-      @focusout="focused = false"
-      @focusin="focused = true"
-      @mouseover="hovered = true"
-      @mouseleave="hovered = false"
-    />
-    <FlexBox w="100%" justify="start" class="errorPlace"
-      >{{ errorMessage ? errorMessage : "" }}
+    >
+      <label>{{ label }}</label>
+      <input
+        v-if="props.label === 'Телефон'"
+        :type="props.type"
+        :maxlength="props.maxLength"
+        v-model="model"
+        @input="telefonNumberMask"
+        @focusout="focused = false"
+        @focusin="focused = true"
+      />
+      <input
+        v-else
+        :type="props.type"
+        :maxlength="props.maxLength"
+        v-model.trim="model"
+        @focusout="focused = false"
+        @focusin="focused = true"
+      />
+    </div>
+    <FlexBox w="100%" justify="start" class="errorPlace">
+      {{ errorMessage ? errorMessage : "" }}
     </FlexBox>
   </FlexBox>
 </template>
@@ -50,7 +50,7 @@ const props = withDefaults(defineProps<TextInputProps>(), {
   maska: "",
 });
 const classInput = ref<string>("");
-const classLabel = ref<string>("");
+// const classLabel = ref<string>("");
 const model = defineModel({ required: true });
 const focused = ref<boolean>(false);
 const hovered = ref<boolean>(false);
@@ -129,18 +129,32 @@ watch(model, () => {
   }
 });
 
-watch([focused, filled, errorText], () => {
-  if (errorText.value !== null) {
-    classInput.value = "errorInInput";
+watch([hovered, focused, filled, errorText], () => {
+  if (filled.value) {
+    classInput.value = "filled";
+    if (hovered.value) {
+      classInput.value = focused.value ? "filled focused" : "filled hovered";
+    }
   } else {
-    if (focused.value) {
-      classInput.value = "focused";
-      classLabel.value = "focusedLabel";
-    } else {
-      classInput.value = filled.value ? "filled" : "";
-      classLabel.value = filled.value ? "filledLabel" : "";
+    classInput.value = "";
+    if (hovered.value) {
+      classInput.value = focused.value ? "filled focused" : "filled hovered";
     }
   }
+
+  // if (errorText.value !== null) {
+  //   classInput.value = "inputPlace errorInInput";
+  // } else {
+  //   if (hovered.value) {
+  //     classInput.value = focused.value
+  //       ? "inputPlace focused"
+  //       : "inputPlace hovered";
+  //   } else if (focused.value) {
+  //     classInput.value = "inputPlace focused";
+  //   } else {
+  //     classInput.value = filled.value ? "inputPlace filled" : "inputPlace";
+  //   }
+  // }
 });
 </script>
 
@@ -148,13 +162,22 @@ watch([focused, filled, errorText], () => {
 input {
   background: transparent;
   border: none;
-  border-bottom: $s2px solid $form-grey;
+  position: relative;
   width: v-bind(w);
   text-align: left;
   align-items: flex-start;
   outline: none;
-  height: 5.2083vw;
   z-index: 3;
+  cursor: pointer;
+  height: 1.8229vw;
+  font-size: 1.1458vw;
+  line-height: 1.8229vw;
+  top: -1.8229vw;
+
+  .filled &,
+  .focused & {
+    top: 0;
+  }
 }
 label {
   width: auto;
@@ -165,60 +188,78 @@ label {
   user-select: none;
   position: relative;
   cursor: pointer;
-  top: 1.8333vw;
+
+  .focused & {
+    font-size: 0.7292vw;
+    line-height: 1.1667vw;
+    color: $primary-blue;
+  }
+
+  .filled & {
+    font-size: 0.7292vw;
+    line-height: 1.1667vw;
+    color: $additional-grey;
+  }
 }
-input:hover {
+.textInput {
+  height: 3.9063vw;
+}
+.inputPlace {
+  height: 2.6042vw;
+  width: v-bind(w);
+  text-align: left;
+  align-items: flex-start;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-start;
+  border-bottom: $s2px solid $form-grey;
+}
+.hovered {
   border-bottom: $s2px solid $additional-grey;
 }
-input:focus {
+.focused {
   border-bottom: $s2px solid $primary-blue;
 }
+
 .errorInInput,
 .errorInInput:hover,
 .errorInInput:focus {
   border-bottom: $s2px solid $error-red;
 }
-
-.textInput {
-  height: 5.2083vw;
-}
 .errorPlace {
   height: 1.3021vw;
-}
-.focusedLabel,
-.filledLabel,
-.errorPlace {
-  font-size: 0.7292vw;
-  line-height: 1.1667vw;
-  top: 0;
-}
-.focusedLabel {
-  color: $primary-blue;
-}
-.filledLabel {
-  color: $additional-grey;
 }
 .errorPlace {
   color: $error-red;
 }
 
 @media (max-width: $small-screen) {
-  .textInput,
   input {
-    height: 10.4167vw;
+    height: 3.6458vw;
+    font-size: 2.2917vw;
+    line-height: 3.6458vw;
   }
-  .errorPlace {
-    height: 2.6042vw;
+  .textInput {
+    height: 7.8125vw;
+  }
+  .inputPlace {
+    height: 5.2083vw;
   }
   label {
     font-size: 2.2917vw;
     line-height: 3.6667vw;
     color: $additional-grey;
-    top: 3.6667vw;
+
+    .filled &,
+    .focused & {
+      font-size: 1.4583vw;
+      line-height: 2.3333vw;
+    }
   }
-  .focusedLabel,
-  .filledLabel,
   .errorPlace {
+    height: 2.6042vw;
     font-size: 1.4583vw;
     line-height: 2.3333vw;
     top: 0;
