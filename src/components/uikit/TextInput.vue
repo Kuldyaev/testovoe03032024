@@ -7,11 +7,11 @@
     class="textInput"
   >
     <div
-      :class="classInput"
+      :class="'inputPlace ' + classInput"
       @mouseover="hovered = true"
       @mouseleave="hovered = false"
     >
-      <label :class="classLabel">{{ label }}</label>
+      <label>{{ label }}</label>
       <input
         v-if="props.label === 'Телефон'"
         :type="props.type"
@@ -49,8 +49,8 @@ const props = withDefaults(defineProps<TextInputProps>(), {
   errorMessage: null,
   maska: "",
 });
-const classInput = ref<string>("inputPlace");
-const classLabel = ref<string>("");
+const classInput = ref<string>("");
+// const classLabel = ref<string>("");
 const model = defineModel({ required: true });
 const focused = ref<boolean>(false);
 const hovered = ref<boolean>(false);
@@ -130,22 +130,31 @@ watch(model, () => {
 });
 
 watch([hovered, focused, filled, errorText], () => {
-  if (errorText.value !== null) {
-    classInput.value = "inputPlace errorInInput";
-  } else {
+  if (filled.value) {
+    classInput.value = "filled";
     if (hovered.value) {
-      classInput.value = focused.value
-        ? "inputPlace focused"
-        : "inputPlace hovered";
-      classLabel.value = focused.value ? "focusedLabel" : "";
-    } else if (focused.value) {
-      classInput.value = "inputPlace focused";
-      classLabel.value = "focusedLabel";
-    } else {
-      classInput.value = filled.value ? "inputPlace filled" : "inputPlace";
-      classLabel.value = filled.value ? "filledLabel" : "";
+      classInput.value = focused.value ? "filled focused" : "filled hovered";
+    }
+  } else {
+    classInput.value = "";
+    if (hovered.value) {
+      classInput.value = focused.value ? "filled focused" : "filled hovered";
     }
   }
+
+  // if (errorText.value !== null) {
+  //   classInput.value = "inputPlace errorInInput";
+  // } else {
+  //   if (hovered.value) {
+  //     classInput.value = focused.value
+  //       ? "inputPlace focused"
+  //       : "inputPlace hovered";
+  //   } else if (focused.value) {
+  //     classInput.value = "inputPlace focused";
+  //   } else {
+  //     classInput.value = filled.value ? "inputPlace filled" : "inputPlace";
+  //   }
+  // }
 });
 </script>
 
@@ -153,12 +162,22 @@ watch([hovered, focused, filled, errorText], () => {
 input {
   background: transparent;
   border: none;
-
+  position: relative;
   width: v-bind(w);
   text-align: left;
   align-items: flex-start;
   outline: none;
   z-index: 3;
+  cursor: pointer;
+  height: 1.8229vw;
+  font-size: 1.1458vw;
+  line-height: 1.8229vw;
+  top: -1.8229vw;
+
+  .filled &,
+  .focused & {
+    top: 0;
+  }
 }
 label {
   width: auto;
@@ -169,12 +188,18 @@ label {
   user-select: none;
   position: relative;
   cursor: pointer;
-  top: 1.8333vw;
-}
-.errorInInput,
-.errorInInput:hover,
-.errorInInput:focus {
-  border-bottom: $s2px solid $error-red;
+
+  .focused & {
+    font-size: 0.7292vw;
+    line-height: 1.1667vw;
+    color: $primary-blue;
+  }
+
+  .filled & {
+    font-size: 0.7292vw;
+    line-height: 1.1667vw;
+    color: $additional-grey;
+  }
 }
 .textInput {
   height: 3.9063vw;
@@ -197,53 +222,44 @@ label {
 .focused {
   border-bottom: $s2px solid $primary-blue;
 }
+
+.errorInInput,
+.errorInInput:hover,
+.errorInInput:focus {
+  border-bottom: $s2px solid $error-red;
+}
 .errorPlace {
   height: 1.3021vw;
-}
-.focusedLabel,
-.filledLabel,
-.errorPlace {
-  font-size: 0.7292vw;
-  line-height: 1.1667vw;
-  top: 0;
-}
-.focusedLabel {
-  color: $primary-blue;
-}
-.filledLabel {
-  color: $additional-grey;
 }
 .errorPlace {
   color: $error-red;
 }
 
 @media (max-width: $small-screen) {
-  .textInput,
   input {
-    height: 10.4167vw;
+    height: 3.6458vw;
+    font-size: 2.2917vw;
+    line-height: 3.6458vw;
   }
-  .errorPlace {
-    height: 2.6042vw;
-  }
-
   .textInput {
     height: 7.8125vw;
   }
   .inputPlace {
     height: 5.2083vw;
   }
-  .errorPlace {
-    height: 2.6042vw;
-  }
   label {
     font-size: 2.2917vw;
     line-height: 3.6667vw;
     color: $additional-grey;
-    top: 3.6667vw;
+
+    .filled &,
+    .focused & {
+      font-size: 1.4583vw;
+      line-height: 2.3333vw;
+    }
   }
-  .focusedLabel,
-  .filledLabel,
   .errorPlace {
+    height: 2.6042vw;
     font-size: 1.4583vw;
     line-height: 2.3333vw;
     top: 0;
