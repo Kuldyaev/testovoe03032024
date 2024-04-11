@@ -110,8 +110,13 @@ const telefonNumberMask = () => {
           currTelefon.value = "";
           model.value = "";
         } else {
-          currTelefon.value = currTelefon.value.slice(0, -1);
-          model.value = masked(parseInt(currTelefon.value));
+          if (currTelefon.value.length > 0) {
+            currTelefon.value = currTelefon.value.slice(0, -1);
+            model.value = masked(parseInt(currTelefon.value));
+          } else {
+            currTelefon.value = "";
+            model.value = "";
+          }
         }
       } else {
         model.value = strModelValue.slice(0, -1);
@@ -121,7 +126,11 @@ const telefonNumberMask = () => {
 };
 
 watch(model, () => {
-  if (filled.value === false && model.value && String(model.value).length > 0) {
+  if (
+    filled.value === false &&
+    !!model.value &&
+    String(model.value).length > 0
+  ) {
     filled.value = true;
   } else if (filled.value === true && String(model.value).length < 1) {
     filled.value = false;
