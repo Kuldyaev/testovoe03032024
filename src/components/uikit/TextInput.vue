@@ -110,8 +110,13 @@ const telefonNumberMask = () => {
           currTelefon.value = "";
           model.value = "";
         } else {
-          currTelefon.value = currTelefon.value.slice(0, -1);
-          model.value = masked(parseInt(currTelefon.value));
+          if (currTelefon.value.length > 0) {
+            currTelefon.value = currTelefon.value.slice(0, -1);
+            model.value = masked(parseInt(currTelefon.value));
+          } else {
+            currTelefon.value = "";
+            model.value = "";
+          }
         }
       } else {
         model.value = strModelValue.slice(0, -1);
@@ -121,7 +126,11 @@ const telefonNumberMask = () => {
 };
 
 watch(model, () => {
-  if (filled.value === false && model.value && String(model.value).length > 0) {
+  if (
+    filled.value === false &&
+    !!model.value &&
+    String(model.value).length > 0
+  ) {
     filled.value = true;
   } else if (filled.value === true && String(model.value).length < 1) {
     filled.value = false;
@@ -141,20 +150,6 @@ watch([hovered, focused, filled, errorText], () => {
       classInput.value = focused.value ? "filled focused" : "filled hovered";
     }
   }
-
-  // if (errorText.value !== null) {
-  //   classInput.value = "inputPlace errorInInput";
-  // } else {
-  //   if (hovered.value) {
-  //     classInput.value = focused.value
-  //       ? "inputPlace focused"
-  //       : "inputPlace hovered";
-  //   } else if (focused.value) {
-  //     classInput.value = "inputPlace focused";
-  //   } else {
-  //     classInput.value = filled.value ? "inputPlace filled" : "inputPlace";
-  //   }
-  // }
 });
 </script>
 
@@ -230,9 +225,9 @@ label {
 }
 .errorPlace {
   height: 1.3021vw;
-}
-.errorPlace {
   color: $error-red;
+  font-size: 0.7292vw;
+  line-height: 1.1667vw;
 }
 
 @media (max-width: $small-screen) {
@@ -262,7 +257,7 @@ label {
     height: 2.6042vw;
     font-size: 1.4583vw;
     line-height: 2.3333vw;
-    top: 0;
+    // top: 0;
   }
 }
 </style>
