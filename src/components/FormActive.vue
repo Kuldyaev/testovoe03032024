@@ -50,7 +50,10 @@
       <h4 class="budgetTitle">Бюджет (₽):</h4>
       <BudgetInput :value="budget" @choseBudget="choseBudget" />
     </FlexBox>
-
+    <FlexBox w="100%" justify="start" direction="row">
+      <div class="skrepa"></div>
+      <div>Прикрепить бриф</div>
+    </FlexBox>
     <FlexBox justify="start" w="100%" class="submitBtnPlace">
       <Button
         category="formSubmit"
@@ -182,6 +185,13 @@ a {
 }
 .budgetPlace {
   margin-top: 20px;
+}
+.skrepa {
+  width: 28px;
+  height: 28px;
+  background-image: url("~@/assets/img/svg/skrepa.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 @media (max-width: $small-screen) {
