@@ -59,7 +59,15 @@
         <div class="skrepa"></div>
         <div class="skrepaTitle">Прикрепить бриф</div>
       </button>
-      <FlexBox> our brief </FlexBox>
+      <a
+        class="ourBriefArea"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSejs7kzr69Ot45UcPbgq-M3KLjjMfer2iKT2peMVGivLJvPow/viewform"
+        target="_blank"
+      >
+        <div class="ourBriefLogo"></div>
+        <div class="ourBriefTitle">Наш бриф в Google Docs</div>
+        <div class="linkSymbol"></div>
+      </a>
     </FlexBox>
     <FlexBox justify="start" w="100%" class="submitBtnPlace">
       <Button
@@ -198,25 +206,57 @@ a {
   margin-top: 3.1771vw;
   height: 1.5625vw;
 }
-.skrepa {
+.skrepa,
+.ourBriefLogo,
+.linkSymbol {
   width: 1.4583vw;
   height: 1.5625vw;
-  margin-right: 0.7813vw;
-  background-image: url("~@/assets/img/svg/skrepa.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
-.skrepaTitle {
+
+.skrepa {
+  background-image: url("~@/assets/img/svg/skrepa.svg");
+  margin-right: 0.7813vw;
+}
+.ourBriefLogo {
+  background-image: url("~@/assets/img/svg/doc.svg");
+  margin-right: 0.4688vw;
+}
+.linkSymbol {
+  background-image: url("~@/assets/img/svg/linkSymbol.svg");
+  width: 0.5vw;
+  height: 1.0625vw;
+  margin-left: 0.15vw;
+}
+.skrepaTitle,
+.ourBriefTitle {
+  font-family: MabryPro, Avenir, Helvetica, Arial, sans-serif;
   font-size: 1.0417vw;
   line-height: 1.5625vw;
+  font-weight: 400;
   height: 100%;
-  width: 10.7813vw;
   user-select: none;
 }
-.skrepaArea {
+.skrepaTitle {
+  width: 11.9271vw;
+  text-align: left;
+}
+.ourBriefTitle,
+.ourBriefTitle:active {
+  text-decoration: none;
+  color: $primary-background;
+  width: 12.7813vw;
+}
+.ourBriefTitle:hover {
+  color: $secondary-blue;
+}
+.skrepaArea,
+.ourBriefArea {
   background: none;
   border: none;
+  padding: 0;
   margin-right: 3.125vw;
   height: 100%;
   display: flex;
@@ -261,14 +301,30 @@ a {
     height: 3.125vw;
     margin-right: 1.5625vw;
   }
-  .skrepaTitle {
+  .skrepaTitle,
+  .ourBriefTitle {
     font-size: 2.0833vw;
     line-height: 3.125vw;
+  }
+  .skrepaTitle {
     width: 21.5625vw;
+  }
+  .ourBriefTitle {
+    width: 25.8541vw;
   }
   .skrepaArea {
     margin-right: 6.25vw;
     z-index: 3;
+  }
+  .ourBriefLogo {
+    width: 2.9167vw;
+    height: 3.125vw;
+    margin-right: 0.9375vw;
+  }
+  .linkSymbol {
+    width: 1vw;
+    height: 3.125vw;
+    margin-left: 0.3vw;
   }
 }
 </style>
