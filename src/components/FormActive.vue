@@ -50,9 +50,16 @@
       <h4 class="budgetTitle">Бюджет (₽):</h4>
       <BudgetInput :value="budget" @choseBudget="choseBudget" />
     </FlexBox>
-    <FlexBox w="100%" justify="start" direction="row">
-      <div class="skrepa"></div>
-      <div>Прикрепить бриф</div>
+    <FlexBox w="100%" justify="start" direction="row" class="addFileArea">
+      <button
+        :class="hovered ? 'skrepaArea  screpaHover' : 'skrepaArea'"
+        @mouseover="hovered = true"
+        @mouseleave="hovered = false"
+      >
+        <div class="skrepa"></div>
+        <div class="skrepaTitle">Прикрепить бриф</div>
+      </button>
+      <FlexBox> our brief </FlexBox>
     </FlexBox>
     <FlexBox justify="start" w="100%" class="submitBtnPlace">
       <Button
@@ -80,6 +87,7 @@ import { FormActiveProps } from "@/shared/types";
 
 const emits = defineEmits(["close", "choseInterest"]);
 const props = defineProps<FormActiveProps>();
+const hovered = ref<boolean>(false);
 const budget = ref<number>(0);
 const name = ref<string | null>(null);
 const phone = ref<string | null | number>(null);
@@ -186,12 +194,37 @@ a {
 .budgetPlace {
   margin-top: 20px;
 }
+.addFileArea {
+  margin-top: 3.1771vw;
+  height: 1.5625vw;
+}
 .skrepa {
-  width: 28px;
-  height: 28px;
+  width: 1.4583vw;
+  height: 1.5625vw;
+  margin-right: 0.7813vw;
   background-image: url("~@/assets/img/svg/skrepa.svg");
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
+}
+.skrepaTitle {
+  font-size: 1.0417vw;
+  line-height: 1.5625vw;
+  height: 100%;
+  width: 10.7813vw;
+  user-select: none;
+}
+.skrepaArea {
+  background: none;
+  border: none;
+  margin-right: 3.125vw;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.screpaHover {
+  background-color: $additional-darkgrey;
+  cursor: pointer;
 }
 
 @media (max-width: $small-screen) {
@@ -218,6 +251,24 @@ a {
   }
   .budgetTitle {
     margin-bottom: 2.5vw;
+  }
+  .addFileArea {
+    margin-top: 6.3542vw;
+    height: 3.125vw;
+  }
+  .skrepa {
+    width: 2.9167vw;
+    height: 3.125vw;
+    margin-right: 1.5625vw;
+  }
+  .skrepaTitle {
+    font-size: 2.0833vw;
+    line-height: 3.125vw;
+    width: 21.5625vw;
+  }
+  .skrepaArea {
+    margin-right: 6.25vw;
+    z-index: 3;
   }
 }
 </style>
