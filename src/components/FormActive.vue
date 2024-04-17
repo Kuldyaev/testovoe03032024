@@ -51,14 +51,20 @@
       <BudgetInput :value="budget" @choseBudget="choseBudget" />
     </FlexBox>
     <FlexBox w="100%" justify="start" direction="row" class="addFileArea">
-      <button
-        :class="hovered ? 'skrepaArea  screpaHover' : 'skrepaArea'"
-        @mouseover="hovered = true"
-        @mouseleave="hovered = false"
-      >
-        <div class="skrepa"></div>
-        <div class="skrepaTitle">Прикрепить бриф</div>
-      </button>
+      <div class="input__wrapper">
+        <input
+          type="file"
+          name="file"
+          id="input__file"
+          class="input input__file"
+        />
+        <label
+          for="input__file"
+          :class="hovered ? 'skrepaArea  screpaHover' : 'skrepaArea'"
+          ><div class="skrepa"></div>
+          <div class="skrepaTitle">Прикрепить бриф</div></label
+        >
+      </div>
       <a
         class="ourBriefArea"
         href="https://docs.google.com/forms/d/e/1FAIpQLSejs7kzr69Ot45UcPbgq-M3KLjjMfer2iKT2peMVGivLJvPow/viewform"
@@ -151,6 +157,66 @@ watch([name, phone, post, task], () => {
 form {
   width: 100%;
 }
+
+.input__wrapper {
+  width: 100%;
+  position: relative;
+  margin: 15px 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.input__file {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+}
+
+.input__file-icon-wrapper {
+  height: 60px;
+  width: 60px;
+  margin-right: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-right: 1px solid #fff;
+  cursor: pointer;
+}
+
+.input__file-button-text {
+  line-height: 1;
+  margin-top: 1px;
+  cursor: pointer;
+}
+
+.input__file-button {
+  width: 100%;
+  max-width: 290px;
+  height: 60px;
+  background: #1bbc9b;
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 700;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
 h3,
 h4,
 h5 {
@@ -261,6 +327,7 @@ a {
   height: 100%;
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 .screpaHover {
   background-color: $additional-darkgrey;
